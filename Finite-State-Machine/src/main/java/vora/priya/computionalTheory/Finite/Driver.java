@@ -20,7 +20,7 @@ public class Driver {
 	}
 	
 	
-	public String readInput() throws IOException { 
+	public String readInput() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("USER: ");
 
