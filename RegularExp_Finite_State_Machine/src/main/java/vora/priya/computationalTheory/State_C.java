@@ -12,7 +12,12 @@ public class State_C implements State {
 		if (currentSymbol.equalsIgnoreCase("d")) {
 			this.machine.setState(this.getMachine().getState_D());
 			System.out.println("Transitioned to d");
-		} else if (currentSymbol.equalsIgnoreCase("h")) {
+		} else if(currentSymbol.equalsIgnoreCase("t")) {  
+			this.machine.setState(this.machine.getState_T());
+			System.out.println("Tranistioned to T");
+		}
+		
+		else if (currentSymbol.equalsIgnoreCase("h")) {
 			this.machine.setState(this.machine.getState_H());
 			System.out.println("Transitioned to H");
 		} else if (currentSymbol.equalsIgnoreCase("a")) {
