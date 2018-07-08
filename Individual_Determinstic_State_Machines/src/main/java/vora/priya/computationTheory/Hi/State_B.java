@@ -11,7 +11,18 @@ public class State_B implements State {
 	}
 
 	public void getNextState(String currentSymbol) {
-
+		if (!(currentSymbol.trim().length() > 0)) {
+			// was space
+			this.machine.setState(this.machine.getState_start());
+			System.out.println("Transitioned to Space");
+		} else if (currentSymbol.equalsIgnoreCase("i")) {
+			// current state is i
+			this.machine.setState(this.machine.getState_C());
+			System.out.println("Transitioned to I");
+		} else { 
+			this.machine.setState(this.machine.getState_S());
+			System.out.println("Transitioned to Starting Point");
+		}
 	}
 
 	public State_Machine getMachine() {

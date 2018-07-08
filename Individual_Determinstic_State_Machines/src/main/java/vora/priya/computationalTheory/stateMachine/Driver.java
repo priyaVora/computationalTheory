@@ -19,9 +19,9 @@ public class Driver {
 
 	public String readInput() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("USER: ");
+		System.out.print("USER:");
 
-		String readline = " " + reader.readLine() + " ";
+		String readline = reader.readLine();
 		return readline;
 	}
 

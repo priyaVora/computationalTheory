@@ -4,6 +4,7 @@ import vora.priya.computationTheory.Hi.State_A;
 import vora.priya.computationTheory.Hi.State_B;
 import vora.priya.computationTheory.Hi.State_C;
 import vora.priya.computationTheory.Hi.State_D;
+import vora.priya.computationTheory.Hi.State_S;
 import vora.priya.computationTheory.Hi.State_Start;
 
 public class State_Machine {
@@ -13,12 +14,14 @@ public class State_Machine {
 	private State_B state_B;
 	private State_C state_C;
 	private State_D state_D;
+	private State_S state_S;
 
 	public State_Machine() {
 		this.state_A = new State_A(this);
 		this.state_B = new State_B(this);
 		this.state_C = new State_C(this);
 		this.state_D = new State_D(this);
+		this.state_S = new State_S(this);
 		this.state_start = new State_Start(this);
 		this.setState(this.state_start);
 	}
@@ -42,6 +45,17 @@ public class State_Machine {
 				// break loop;
 			}
 			counter++;
+		}
+
+		if (currentState.equals(this.state_D)) {
+			System.out.println("REACHED");
+			input_exist = true;
+		} else if (currentState.equals(this.state_C)) {
+			System.out.println("REACHED");
+			input_exist = true;
+		} else {
+			System.out.println("FAILED TO REACH");
+			input_exist = false;
 		}
 		return input_exist;
 	}
@@ -74,4 +88,11 @@ public class State_Machine {
 		return state_D;
 	}
 
+	public State_S getState_S() {
+		return state_S;
+	}
+
+	public void setState_S(State_S state_S) {
+		this.state_S = state_S;
+	}
 }

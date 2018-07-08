@@ -9,10 +9,18 @@ public class State_C implements State {
 
 	public State_C(State_Machine machine) {
 		this.setMachine(machine);
+		this.recognizedWord = "hi";
 	}
 
 	public void getNextState(String currentSymbol) {
+		System.out.println("Final State Reached...");
 
+		recognizedWord = "hi";
+		if (!(currentSymbol.trim().length() > 0)) {
+			// was space
+			this.machine.setState(this.machine.getState_D());
+			System.out.println("Transitioned to Space");
+		}
 	}
 
 	public State_Machine getMachine() {

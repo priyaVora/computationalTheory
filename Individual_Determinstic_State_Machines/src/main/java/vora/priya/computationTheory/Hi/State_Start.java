@@ -11,10 +11,18 @@ public class State_Start implements State {
 	}
 
 	public void getNextState(String currentSymbol) {
-		if(currentSymbol.equalsIgnoreCase("")) { 
-			
-		} else { 
-			
+		if (currentSymbol.equalsIgnoreCase("h")) {
+			// current state is h
+			this.machine.setState(this.machine.getState_B());
+			System.out.println("Transitioned to H");
+		} else if (!(currentSymbol.trim().length() > 0)) {
+			// was space
+			this.machine.setState(this.machine.getState_A());
+			System.out.println("Transitioned to Space");
+		} else if ((currentSymbol.trim().length() > 0)) {
+			// not space
+			this.machine.setState(this.machine.getState_S());
+			System.out.println("Transitioned to not Space");
 		}
 	}
 
