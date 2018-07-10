@@ -11,7 +11,16 @@ public class State_H implements State {
 	}
 
 	public void getNextState(String currentSymbol) {
-
+		if (currentSymbol.equalsIgnoreCase("d")) {
+			this.machine.setState(this.machine.getState_J());
+			System.out.println("Transitioned to d");
+		} else if (!(currentSymbol.trim().length() > 0)) {
+			this.machine.setState(this.machine.getState_Start());
+			System.out.println("Transitiones to Space");
+		} else {
+			this.machine.setState(this.machine.getState_R());
+			System.out.println("Transitioned back to Start");
+		}
 	}
 
 	public State_Machine getMachine() {

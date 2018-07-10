@@ -203,10 +203,11 @@ public class State_Machine {
 		loop: while (counter != sizeOfTestValue) {
 			this.getState().getNextState("" + val[counter]);
 			currentState = this.getState();
-			
+
 			counter++;
 		}
-		if (currentState.equals(this.getState_C()) || currentState.equals(this.getState_Final()) || currentState.equals(this.getState_G())) {
+		if (currentState.equals(this.getState_C()) || currentState.equals(this.getState_Final())
+				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K())) {
 			input_exist = true;
 			// break loop;
 		}
