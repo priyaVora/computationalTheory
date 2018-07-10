@@ -36,6 +36,7 @@ import vora.priya.computationalTheory.starting_others.State_NN;
 import vora.priya.computationalTheory.starting_others.State_O;
 import vora.priya.computationalTheory.starting_others.State_P;
 import vora.priya.computationalTheory.starting_others.State_PP;
+import vora.priya.computationalTheory.starting_others.State_PPP;
 import vora.priya.computationalTheory.starting_others.State_Q;
 import vora.priya.computationalTheory.starting_others.State_QQ;
 import vora.priya.computationalTheory.starting_others.State_Question;
@@ -128,6 +129,7 @@ public class State_Machine {
 	private State_RRR state_RRR;
 	private State_WWW state_WWW;
 	private State_DDD state_DDD;
+	private State_PPP state_PPP;
 
 	public State_Machine() {
 		this.setState(state_Start);
@@ -138,6 +140,7 @@ public class State_Machine {
 		this.state_WWW = new State_WWW(this);
 		this.state_RRR = new State_RRR(this);
 		this.state_DDD = new State_DDD(this);
+		this.state_PPP = new State_PPP(this);
 		this.state_Question = new State_Question(this);
 
 		this.state_A = new State_A(this);
@@ -225,7 +228,9 @@ public class State_Machine {
 		}
 		if (currentState.equals(this.getState_C()) || currentState.equals(this.getState_Final())
 				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K())
-				|| currentState.equals(this.getState_Question())) {
+				|| currentState.equals(this.getState_Question()) || currentState.equals(this.getState_LL())
+				|| currentState.equals(this.getState_TT()) || currentState.equals(this.getState_DDD())
+				|| currentState.equals(this.getState_ZZ())) {
 			input_exist = true;
 			// break loop;
 		}
@@ -271,6 +276,10 @@ public class State_Machine {
 
 	public State_D getState_D() {
 		return state_D;
+	}
+
+	public State_PPP getState_PPP() {
+		return state_PPP;
 	}
 
 	public State_E getState_E() {
