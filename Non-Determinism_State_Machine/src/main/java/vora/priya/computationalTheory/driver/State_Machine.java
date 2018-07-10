@@ -11,6 +11,7 @@ import vora.priya.computationalTheory.starting_others.State_CC;
 import vora.priya.computationalTheory.starting_others.State_CCC;
 import vora.priya.computationalTheory.starting_others.State_D;
 import vora.priya.computationalTheory.starting_others.State_DD;
+import vora.priya.computationalTheory.starting_others.State_DDD;
 import vora.priya.computationalTheory.starting_others.State_E;
 import vora.priya.computationalTheory.starting_others.State_EE;
 import vora.priya.computationalTheory.starting_others.State_F;
@@ -52,6 +53,7 @@ import vora.priya.computationalTheory.starting_others.State_V;
 import vora.priya.computationalTheory.starting_others.State_VV;
 import vora.priya.computationalTheory.starting_others.State_W;
 import vora.priya.computationalTheory.starting_others.State_WW;
+import vora.priya.computationalTheory.starting_others.State_WWW;
 import vora.priya.computationalTheory.starting_others.State_X;
 import vora.priya.computationalTheory.starting_others.State_XX;
 import vora.priya.computationalTheory.starting_others.State_Y;
@@ -124,6 +126,8 @@ public class State_Machine {
 	private State_Start state_Start;
 	private State_Final state_Final;
 	private State_RRR state_RRR;
+	private State_WWW state_WWW;
+	private State_DDD state_DDD;
 
 	public State_Machine() {
 		this.setState(state_Start);
@@ -131,7 +135,9 @@ public class State_Machine {
 	}
 
 	public void setAllStates() {
+		this.state_WWW = new State_WWW(this);
 		this.state_RRR = new State_RRR(this);
+		this.state_DDD = new State_DDD(this);
 		this.state_Question = new State_Question(this);
 
 		this.state_A = new State_A(this);
@@ -196,6 +202,10 @@ public class State_Machine {
 		this.state_Final = new State_Final(this);
 	}
 
+	public State_DDD getState_DDD() {
+		return state_DDD;
+	}
+
 	public boolean state_Machine_Helper(String userInput) {
 		boolean input_exist = false;
 		this.setState(this.getState_Start());
@@ -214,7 +224,8 @@ public class State_Machine {
 			counter++;
 		}
 		if (currentState.equals(this.getState_C()) || currentState.equals(this.getState_Final())
-				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K()) || currentState.equals(this.getState_Question())) {
+				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K())
+				|| currentState.equals(this.getState_Question())) {
 			input_exist = true;
 			// break loop;
 		}
@@ -232,6 +243,10 @@ public class State_Machine {
 
 	public State_A getState_A() {
 		return state_A;
+	}
+
+	public State_WWW getState_WWW() {
+		return state_WWW;
 	}
 
 	public State_B getState_B() {

@@ -1,8 +1,9 @@
 package vora.priya.computationalTheory.starting_others;
 
+import vora.priya.computationalTheory.driver.State;
 import vora.priya.computationalTheory.driver.State_Machine;
 
-public class State_ZZ {
+public class State_ZZ implements State {
 	private State_Machine machine;
 
 	public State_ZZ(State_Machine machine) {
@@ -10,7 +11,13 @@ public class State_ZZ {
 	}
 
 	public void getNextState(String currentSymbol) {
-
+		if (!(currentSymbol.trim().length() > 0)) {
+			this.machine.setState(this.machine.getState_Final());
+			System.out.println("Final State Reached.");
+		} else {
+			this.machine.setState(this.machine.getState_R());
+			System.out.println("Invalid Input: Transitioned back to Start.");
+		}
 	}
 
 	public State_Machine getMachine() {
