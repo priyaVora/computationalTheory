@@ -11,7 +11,16 @@ public class State_EE implements State {
 	}
 
 	public void getNextState(String currentSymbol) {
-
+		if (currentSymbol.equalsIgnoreCase("d")) {
+			this.machine.setState(this.machine.getState_FF());
+			System.out.println("Transitioned to D ");
+		} else if (!(currentSymbol.trim().length() > 0)) {
+			this.machine.setState(this.machine.getState_EE());
+			System.out.println("Transitiones to Space");
+		} else {
+			this.machine.setState(this.machine.getState_R());
+			System.out.println("Transitioned back to Start");
+		}
 	}
 
 	public State_Machine getMachine() {

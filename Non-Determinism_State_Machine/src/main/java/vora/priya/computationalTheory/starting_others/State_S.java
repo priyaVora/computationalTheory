@@ -11,7 +11,19 @@ public class State_S implements State {
 	}
 
 	public void getNextState(String currentSymbol) {
-
+		if (currentSymbol.equalsIgnoreCase("?")) {
+			this.machine.setState(this.machine.getState_Question());
+			System.out.println("Transitioned to ? ");
+		} else if (currentSymbol.equalsIgnoreCase("d")) {
+			this.machine.setState(this.machine.getState_T());
+			System.out.println("Transitioned to D");
+		} else if (!(currentSymbol.trim().length() > 0)) {
+			this.machine.setState(this.machine.getState_Start());
+			System.out.println("Transitiones to Space");
+		} else {
+			this.machine.setState(this.machine.getState_R());
+			System.out.println("Transitioned back to Start");
+		}
 	}
 
 	public State_Machine getMachine() {

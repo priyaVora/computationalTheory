@@ -37,8 +37,10 @@ import vora.priya.computationalTheory.starting_others.State_P;
 import vora.priya.computationalTheory.starting_others.State_PP;
 import vora.priya.computationalTheory.starting_others.State_Q;
 import vora.priya.computationalTheory.starting_others.State_QQ;
+import vora.priya.computationalTheory.starting_others.State_Question;
 import vora.priya.computationalTheory.starting_others.State_R;
 import vora.priya.computationalTheory.starting_others.State_RR;
+import vora.priya.computationalTheory.starting_others.State_RRR;
 import vora.priya.computationalTheory.starting_others.State_S;
 import vora.priya.computationalTheory.starting_others.State_SS;
 import vora.priya.computationalTheory.starting_others.State_Start;
@@ -60,6 +62,7 @@ import vora.priya.computationalTheory.starting_others.State_oo;
 
 public class State_Machine {
 	public State state;
+	private State_Question state_Question;
 	private State_A state_A;
 	private State_B state_B;
 	private State_C state_C;
@@ -120,6 +123,7 @@ public class State_Machine {
 
 	private State_Start state_Start;
 	private State_Final state_Final;
+	private State_RRR state_RRR;
 
 	public State_Machine() {
 		this.setState(state_Start);
@@ -127,6 +131,9 @@ public class State_Machine {
 	}
 
 	public void setAllStates() {
+		this.state_RRR = new State_RRR(this);
+		this.state_Question = new State_Question(this);
+
 		this.state_A = new State_A(this);
 		this.state_B = new State_B(this);
 		this.state_C = new State_C(this);
@@ -207,7 +214,7 @@ public class State_Machine {
 			counter++;
 		}
 		if (currentState.equals(this.getState_C()) || currentState.equals(this.getState_Final())
-				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K())) {
+				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K()) || currentState.equals(this.getState_Question())) {
 			input_exist = true;
 			// break loop;
 		}
@@ -229,6 +236,10 @@ public class State_Machine {
 
 	public State_B getState_B() {
 		return state_B;
+	}
+
+	public State_Question getState_Question() {
+		return state_Question;
 	}
 
 	public State_C getState_C() {
@@ -449,6 +460,10 @@ public class State_Machine {
 
 	public State_CCC getState_CCC() {
 		return state_CCC;
+	}
+
+	public State_RRR getState_RRR() {
+		return state_RRR;
 	}
 
 }
