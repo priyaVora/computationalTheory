@@ -131,6 +131,8 @@ public class State_Machine {
 	private State_DDD state_DDD;
 	private State_PPP state_PPP;
 
+	private String recognizedWord = "";
+
 	public State_Machine() {
 		this.setState(state_Start);
 		setAllStates();
@@ -209,8 +211,9 @@ public class State_Machine {
 		return state_DDD;
 	}
 
-	public boolean state_Machine_Helper(String userInput) {
+	public String state_Machine_Helper(String userInput) {
 		boolean input_exist = false;
+		String recogWord = "";
 		this.setState(this.getState_Start());
 		State currentState = this.getState();
 
@@ -226,15 +229,27 @@ public class State_Machine {
 
 			counter++;
 		}
-		if (currentState.equals(this.getState_C()) || currentState.equals(this.getState_Final())
-				|| currentState.equals(this.getState_G()) || currentState.equals(this.getState_K())
-				|| currentState.equals(this.getState_Question()) || currentState.equals(this.getState_LL())
-				|| currentState.equals(this.getState_TT()) || currentState.equals(this.getState_DDD())
-				|| currentState.equals(this.getState_ZZ())) {
+		if (currentState.equals(this.getState_C())) {
 			input_exist = true;
-			// break loop;
+			return "hi";
+		} else if (currentState.equals(this.getState_Final())) {
+			return this.getState_Final().getRecognizedWord();
+		} else if (currentState.equals(this.getState_G())) {
+			return "hello";
+		} else if (currentState.equals(this.getState_K())) {
+			return "howdy";
+		} else if (currentState.equals(this.getState_Question())) {
+			return "?";
+		} else if (currentState.equals(this.getState_LL())) {
+			return "aloha";
+		} else if (currentState.equals(this.getState_TT())) {
+			return "ahoy mate";
+		} else if (currentState.equals(this.getState_DDD())) {
+			return "thank you";
+		} else if (currentState.equals(this.getState_ZZ())) {
+			return "thanks";
 		}
-		return input_exist;
+		return null;
 
 	}
 

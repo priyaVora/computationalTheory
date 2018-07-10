@@ -11,7 +11,13 @@ public class State_Z implements State {
 	}
 
 	public void getNextState(String currentSymbol) {
-
+		if (!(currentSymbol.trim().length() > 0)) {
+			this.machine.setState(this.machine.getState_AA());
+			System.out.println("Transitiones to Space");
+		} else {
+			this.machine.setState(this.machine.getState_R());
+			System.out.println("Transitioned back to Start");
+		}
 	}
 
 	public State_Machine getMachine() {

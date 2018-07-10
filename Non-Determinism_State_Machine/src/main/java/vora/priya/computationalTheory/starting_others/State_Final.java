@@ -3,8 +3,9 @@ package vora.priya.computationalTheory.starting_others;
 import vora.priya.computationalTheory.driver.State;
 import vora.priya.computationalTheory.driver.State_Machine;
 
-public class State_Final implements State{
+public class State_Final implements State {
 	private State_Machine machine;
+	private String recognizedWord = "";
 
 	public State_Final(State_Machine machine) {
 		this.setMachine(machine);
@@ -24,4 +25,13 @@ public class State_Final implements State{
 		}
 		this.machine = machine;
 	}
+
+	public String getRecognizedWord() {
+		return recognizedWord;
+	}
+
+	public void setRecognizedWord(String recognizedWord) {
+		this.recognizedWord = recognizedWord;
+	}
+
 }

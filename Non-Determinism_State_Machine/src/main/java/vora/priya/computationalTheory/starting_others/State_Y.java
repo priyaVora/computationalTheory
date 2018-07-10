@@ -13,7 +13,7 @@ public class State_Y implements State {
 	public void getNextState(String currentSymbol) {
 		if (currentSymbol.equalsIgnoreCase("o")) {
 			this.machine.setState(this.machine.getState_Z());
-			System.out.println("Transitioned to o ");
+			System.out.println("Transitioned to O ");
 		} else if (!(currentSymbol.trim().length() > 0)) {
 			this.machine.setState(this.machine.getState_AA());
 			System.out.println("Transitiones to Space");
