@@ -8,24 +8,9 @@ public class Nominative_Case {
 	private Nominative_Case nominative_case;
 	private Noun noun;
 
-	private Nominative_Case() {
-
-	}
-
-	private Nominative_Case(Adjective adjective, Nominative_Case nominative_case) {
-		this.adjective = adjective;
-		this.nominative_case = nominative_case;
-	}
-
 	public Nominative_Case(Noun noun) {
 
 	}
-
-	public Nominative_Case(Adjective adjective, Noun noun) {
-		this.adjective = adjective;
-		this.noun = noun;
-	}
-
 	public Adjective getAdjective() {
 		return adjective;
 	}

@@ -5,12 +5,8 @@ public class Sentence {
 	private Verb_Phrase verb_Phrase;
 
 	public void Sentence() {
-		
-	}
-
-	public void Sentence(Noun_Phrase noun_Phrase, Verb_Phrase verb_Phrase) {
-		this.noun_Phrase = noun_Phrase;
-		this.verb_Phrase = verb_Phrase;
+		noun_Phrase = null;
+		verb_Phrase = null;
 	}
 
 	public Noun_Phrase getNoun_Phrase() {

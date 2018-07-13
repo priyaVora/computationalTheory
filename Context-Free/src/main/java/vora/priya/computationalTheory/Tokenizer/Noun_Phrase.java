@@ -8,11 +8,6 @@ public class Noun_Phrase {
 
 	}
 
-	public Noun_Phrase(Determiner determiner, Nominative_Case nominative_Case) {
-		this.setDeterminer(determiner);
-		this.setNominative_Case(nominative_Case);
-	}
-
 	public Determiner getDeterminer() {
 		return determiner;
 	}
@@ -28,5 +23,4 @@ public class Noun_Phrase {
 	public void setNominative_Case(Nominative_Case nominative_Case) {
 		this.nominative_Case = nominative_Case;
 	}
-
 }

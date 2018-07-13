@@ -4,11 +4,6 @@ public class Verb_Phrase {
 	private Verb verb;
 	private Noun_Phrase noun_Phrase;
 
-	public Verb_Phrase() {
-		this.setNoun_Phrase(noun_Phrase);
-		this.setVerb(verb);
-	}
-
 	public Verb getVerb() {
 		return verb;
 	}
