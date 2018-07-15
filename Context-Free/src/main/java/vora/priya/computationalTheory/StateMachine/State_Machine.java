@@ -6,6 +6,8 @@ public class State_Machine {
 	private State_Start state_Start;
 	private State_A state_A;
 	private State_Final state_Final;
+	
+	private String currentRecognizedWord = "";
 
 	public State_Machine() {
 		setState(state);
@@ -28,14 +30,18 @@ public class State_Machine {
 		loop: while (counter != sizeOfTestValue) {
 			this.getState().getNextState("" + val[counter]);
 			currentState = this.getState();
-			if (currentState.equals(this.getState_Final())) {
+			if (currentState.equals(this.getState_Final()) && (counter +1) == sizeOfTestValue) {
 				input_exist = true;
+				currentRecognizedWord += val[counter];
 				break loop;
 			}
-
+			currentRecognizedWord += val[counter];
 			counter++;
 		}
-
+		
+		if(input_exist == false) { 
+			setCurrentRecognizedWord(null);
+		}
 		return input_exist;
 
 	}
@@ -71,4 +77,14 @@ public class State_Machine {
 	public void setState_Final(State_Final state_Final) {
 		this.state_Final = state_Final;
 	}
+
+	public String getCurrentRecognizedWord() {
+		return currentRecognizedWord;
+	}
+
+	public void setCurrentRecognizedWord(String currentRecognizedWord) {
+		this.currentRecognizedWord = currentRecognizedWord;
+	}
+	
+	
 }

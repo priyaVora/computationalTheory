@@ -1,6 +1,6 @@
-package vora.priya.computationalTheory.Tokenizer;
+package vora.priya.computationalTheory.ParseTree;
 
-public class Noun_Phrase {
+public class Noun_Phrase extends Symbol{
 	private Determiner determiner;
 	private Nominative_Case nominative_Case;
 
@@ -23,4 +23,6 @@ public class Noun_Phrase {
 	public void setNominative_Case(Nominative_Case nominative_Case) {
 		this.nominative_Case = nominative_Case;
 	}
+	
+	
 }

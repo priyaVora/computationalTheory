@@ -3,8 +3,9 @@ package vora.priya.computationalTheory.Driver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Random;
+import java.util.ArrayList;
 
+import vora.priya.computationalTheory.ParseTree.ParseTree;
 import vora.priya.computationalTheory.StateMachine.State_Machine;
 
 public class Driver {
@@ -40,40 +41,10 @@ public class Driver {
 		String[] thank_you_Responses = { "You're welcome", "No, thank you!", "My pleasure", "No Problem" };
 		String[] no_match_Responses = { "What great weather!", "Tell me about yourself", "What do you like to do?",
 				"What makes you sad?" };
-		Random rand = new Random();
-		int random = 0;
-		String responseToBeReturned = null;
-		 boolean input_Exist = machine.is_Word(testString);
-		 System.out.println("  Is Word: " + input_Exist);
-		// if (input_Exist == true) {
-		// if (machine.getState_G().getRecognizedWord().equals("hi")) {
-		// random = rand.nextInt(hi_Responses.length);
-		// responseToBeReturned = hi_Responses[random];
-		// } else if (machine.getState_G().getRecognizedWord().equals("hello")) {
-		// random = rand.nextInt(hello_Responses.length);
-		// responseToBeReturned = hello_Responses[random];
-		// } else if (machine.getState_G().getRecognizedWord().equals("howdy")) {
-		// random = rand.nextInt(howdy_Responses.length);
-		// responseToBeReturned = howdy_Responses[random];
-		// } else if (machine.getState_G().getRimport
-		// vora.priya.computationalTheory.State_Machine;ecognizedWord().equals("aloha"))
-		// {
-		// random = rand.nextInt(aloha_Responses.length);
-		// responseToBeReturned = aloha_Responses[random];
-		// } else if (machine.getState_G().getRecognizedWord().equals("thankYou")) {
-		// random = rand.nextInt(thank_you_Responses.length);
-		// responseToBeReturned = thank_you_Responses[random];
-		// } else if(machine.getState_G().getRecognizedWord().equals("thanks")) {
-		// random = rand.nextInt(thank_you_Responses.length);
-		// responseToBeReturned = thank_you_Responses[random];
-		// }
-		//
-		// return responseToBeReturned;
-		// } else {
-		// random = rand.nextInt(no_match_Responses.length);
-		// responseToBeReturned = no_match_Responses[random];
-		// return responseToBeReturned;
-		// }
+		
+		ParseTree parseTree = new ParseTree();
+		parseTree.isSentence(testString);
+				
 		return "This is my message";
 	}
 }

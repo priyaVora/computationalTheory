@@ -1,6 +1,6 @@
-package vora.priya.computationalTheory.Tokenizer;
+package vora.priya.computationalTheory.ParseTree;
 
-public class Verb_Phrase {
+public class Verb_Phrase extends Symbol{
 	private Verb verb;
 	private Noun_Phrase noun_Phrase;
 

@@ -1,14 +1,14 @@
-package vora.priya.computationalTheory.Tokenizer;
+package vora.priya.computationalTheory.ParseTree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nominative_Case {
+public class Nominative_Case extends Symbol {
 	private Adjective adjective;
 	private Nominative_Case nominative_case;
 	private Noun noun;
 
-	public Nominative_Case(Noun noun) {
+	public Nominative_Case() {
 
 	}
 	public Adjective getAdjective() {
@@ -33,5 +33,15 @@ public class Nominative_Case {
 
 	public void setNoun(Noun noun) {
 		this.noun = noun;
+	}
+	
+	public boolean isNom(Noun noun) { 
+		Noun checkNoun = new Noun();
+		boolean check = checkNoun.isNoun(noun.getSymbol());
+		if(check == true) { 
+			return true;
+		} else { 
+			return false;
+		}
 	}
 }
