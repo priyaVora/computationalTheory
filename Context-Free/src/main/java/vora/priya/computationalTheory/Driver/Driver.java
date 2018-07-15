@@ -34,17 +34,16 @@ public class Driver {
 	}
 
 	public String chatBot_Message(State_Machine machine, String testString) {
-		String[] hi_Responses = { "Hi", "sup?", "What's up?", "Hey!" };
-		String[] hello_Responses = { "Hello", "How are you?" };
-		String[] howdy_Responses = { "Howdy partner", "Howdy!" };
-		String[] aloha_Responses = { "Aloha", "Surf's up!" };
-		String[] thank_you_Responses = { "You're welcome", "No, thank you!", "My pleasure", "No Problem" };
-		String[] no_match_Responses = { "What great weather!", "Tell me about yourself", "What do you like to do?",
-				"What makes you sad?" };
-		
+
 		ParseTree parseTree = new ParseTree();
-		parseTree.isSentence(testString);
-				
-		return "This is my message";
+		boolean valid_response = parseTree.isSentence(testString);
+		
+		if(valid_response == true) { 
+			parseTree.printStack();
+			return "I understand you!";
+		} else { 
+			parseTree.printStack();
+			return "Sorry, I didn't understand what you said, can you please repeat yourself?";
+		}
 	}
 }

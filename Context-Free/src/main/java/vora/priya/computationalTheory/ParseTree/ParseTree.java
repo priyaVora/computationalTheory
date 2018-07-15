@@ -52,7 +52,7 @@ public class ParseTree {
 
 		checkifNomExist();
 
-		printStack();
+		//printStack();
 		return checkIfStackContainsAValidSentence();
 	}
 
@@ -223,11 +223,13 @@ public class ParseTree {
 	}
 
 	public void printStack() {
+		
+		Stack<Symbol> newStack = stack;
 
 		System.out.println("---------------");
-		int stackCount = stack.size();
+		int stackCount = newStack.size();
 		for (int i = 0; i < stackCount; i++) {
-			System.out.println("     " + stack.pop().getSymbol());
+			System.out.println("     " + newStack.pop().getSymbol());
 			System.out.println("---------------");
 
 		}
