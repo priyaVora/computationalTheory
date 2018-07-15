@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Adjective extends Symbol{
 	List<String> listOfAdjectives;
+	String adjectiveValue;
 
 	public Adjective() {
 		listOfAdjectives = new ArrayList<String>();
@@ -34,4 +35,12 @@ public class Adjective extends Symbol{
 		}
 
 	}
+
+	public String getAdjectiveValue() {
+		return adjectiveValue;
+	}
+
+	public void setAdjectiveValue(String adjectiveValue) {
+		this.adjectiveValue = adjectiveValue;
+	}	
 }

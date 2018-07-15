@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Determiner extends Symbol {
 	List<String> listOfDeterminer;
+	String determiner_Value; 
 
 	public Determiner() {
 		listOfDeterminer = new ArrayList<String>();
@@ -34,4 +35,14 @@ public class Determiner extends Symbol {
 		}
 
 	}
+
+	public String getDeterminer_Value() {
+		return determiner_Value;
+	}
+
+	public void setDeterminer_Value(String determiner_Value) {
+		this.determiner_Value = determiner_Value;
+	}
+	
+	
 }

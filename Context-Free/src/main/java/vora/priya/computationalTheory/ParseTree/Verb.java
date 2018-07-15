@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Verb extends Symbol {
 	List<String> listOfVerbs;
+	String verb_Value;
 
 	public Verb() {
 		listOfVerbs = new ArrayList<String>();
@@ -19,7 +20,7 @@ public class Verb extends Symbol {
 	public List<String> getListOfVerbs() {
 		return listOfVerbs;
 	}
-	
+
 	public boolean isVerb(String word) {
 		String checkWord = "";
 		char[] val = word.toCharArray();
@@ -34,4 +35,13 @@ public class Verb extends Symbol {
 		}
 
 	}
+
+	public String getVerb_Value() {
+		return verb_Value;
+	}
+
+	public void setVerb_Value(String verb_Value) {
+		this.verb_Value = verb_Value;
+	}
+
 }

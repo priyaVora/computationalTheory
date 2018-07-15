@@ -9,6 +9,7 @@ public class ParseTree {
 	private Tokenizer tokenizer;
 
 	Stack<Symbol> stack = new Stack<Symbol>();
+	Sentence sentenceRecognized = new Sentence();
 
 	public ParseTree() {
 		tokenizer = new Tokenizer();
@@ -36,24 +37,20 @@ public class ParseTree {
 			Symbol symbol = new Symbol();
 			symbol.setSymbol(eachToken);
 			stack.add(symbol);
-
-			// while (!(stack.peek() instanceof Sentence)) { // while the top of the stack
-			// can be reduced....
-			// System.out.println("Shreya!");
-			// }
-
-			if (checkIfStackCanBeReduced() == true) {
-
+			if (checkIfStackCanBeReduced(symbol) == true) {
 				checkifNomExist();
-
 			}
 			counter = 0;
 		}
 
 		checkifNomExist();
-
-		//printStack();
-		return checkIfStackContainsAValidSentence();
+		boolean valid = checkIfStackContainsAValidSentence();
+		// if(valid == true) {
+		// Sentence sentence = stack.peek();
+		// } else {
+		//
+		// }
+		return valid;
 	}
 
 	public boolean checkIfStackContainsAValidSentence() {
@@ -72,23 +69,29 @@ public class ParseTree {
 	}
 
 	public void checkifNomExist() {
+		Noun noun = new Noun();
+		Adjective adjective = new Adjective();
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("Noun")) {
-				stack.pop();
+				noun = (Noun) stack.pop();
 				if (!(stack.isEmpty())) {
 					if (stack.peek().getSymbol().equals("Adjective")) {
-						stack.pop();
+						adjective = (Adjective) stack.pop();
 						Nominative_Case nom = new Nominative_Case();
+						nom.setAdjective(adjective);
+						nom.setNoun(noun);
 						nom.setSymbol("Nom");
 						stack.push(nom);
-					} else { 
+					} else {
 						Nominative_Case nom = new Nominative_Case();
 						nom.setSymbol("Nom");
+						nom.setAdjective(null);
+						nom.setNoun(noun);
 						stack.push(nom);
 					}
 				} else {
-					Noun noun = new Noun();
-					noun.setSymbol("Noun");
+
+					// noun.setSymbol("Noun");
 					stack.push(noun);
 				}
 			}
@@ -98,17 +101,22 @@ public class ParseTree {
 	}
 
 	private void checkIfNounPhraseExist() {
+		Nominative_Case nom = new Nominative_Case();
+		Determiner determiner = new Determiner();
+
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("Nom")) {
-				stack.pop();
+				nom = (Nominative_Case) stack.pop();
 				if (stack.peek().getSymbol().equals("Determinant")) {
-					stack.pop();
+					determiner = (Determiner) stack.pop();
 					Noun_Phrase noun_phrase = new Noun_Phrase();
 					noun_phrase.setSymbol("NP");
+					noun_phrase.setDeterminer(determiner);
+					noun_phrase.setNominative_Case(nom);
 					stack.push(noun_phrase);
 				} else {
-					Nominative_Case nom = new Nominative_Case();
-					nom.setSymbol("Nom");
+					// Nominative_Case nom = new Nominative_Case();
+					// nom.setSymbol("Nom");
 					stack.push(nom);
 				}
 			}
@@ -135,27 +143,31 @@ public class ParseTree {
 	}
 
 	private void checkIfVerbPhrase() {
+		Noun_Phrase np = new Noun_Phrase();
+		Verb verb = new Verb();
+
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("NP")) {
-				stack.pop();
+				np = (Noun_Phrase) stack.pop();
 				if (!(stack.isEmpty())) {
 					if (stack.peek().getSymbol().equals("Verb")) {
-						stack.pop();
+						verb = (Verb) stack.pop();
 						Verb_Phrase verb_phrase = new Verb_Phrase();
 						verb_phrase.setSymbol("VP");
+						verb_phrase.setNoun_Phrase(np);
+						verb_phrase.setVerb(verb);
 						stack.push(verb_phrase);
 					}
 				} else {
-					Noun_Phrase noun_phrase = new Noun_Phrase();
-					noun_phrase.setSymbol("NP");
-					stack.push(noun_phrase);
+					
+					stack.push(np);
 				}
 			}
 		}
 		checkIfSentence();
 	}
 
-	public boolean checkIfStackCanBeReduced() {
+	public boolean checkIfStackCanBeReduced(Symbol symbol) {
 		Sentence sentence = new Sentence();
 		Noun_Phrase noun_phrase = new Noun_Phrase();
 		Verb_Phrase verb_phrase = new Verb_Phrase();
@@ -163,12 +175,14 @@ public class ParseTree {
 		if (checkifStackCanReduceTo_Determinant() == true) {
 			Determiner det = new Determiner();
 			det.setSymbol("Determinant");
+			det.setDeterminer_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(det);
 			return true;
 		} else if (checkifStackCanReduceTo_Noun() == true) {
 			Noun noun = new Noun();
 			noun.setSymbol("Noun");
+			noun.setNoun_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(noun);
 			return true;
@@ -181,12 +195,14 @@ public class ParseTree {
 		} else if (checkifStackCanReduceTo_Adjective() == true) {
 			Adjective adjective = new Adjective();
 			adjective.setSymbol("Adjective");
+			adjective.setAdjectiveValue(symbol.getSymbol());
 			stack.pop();
 			stack.push(adjective);
 			return true;
 		} else if (checkifStackCanReduceTo_Verb() == true) {
 			Verb verb = new Verb();
 			verb.setSymbol("Verb");
+			verb.setVerb_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(verb);
 			return true;
@@ -223,7 +239,7 @@ public class ParseTree {
 	}
 
 	public void printStack() {
-		
+
 		Stack<Symbol> newStack = stack;
 
 		System.out.println("---------------");
@@ -237,4 +253,13 @@ public class ParseTree {
 		System.out.println("     " + "E");
 		System.out.println("---------------");
 	}
+
+	public Sentence getSentenceRecognized() {
+		return sentenceRecognized;
+	}
+
+	public void setSentenceRecognized(Sentence sentenceRecognized) {
+		this.sentenceRecognized = sentenceRecognized;
+	}
+
 }

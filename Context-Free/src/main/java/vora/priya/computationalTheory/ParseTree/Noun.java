@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Noun extends Symbol {
 	List<String> listOfNouns;
+	String noun_Value;
 
 	public Noun() {
 		listOfNouns = new ArrayList<String>();
@@ -18,7 +19,7 @@ public class Noun extends Symbol {
 	public List<String> getListOfNouns() {
 		return listOfNouns;
 	}
-	
+
 	public boolean isNoun(String word) {
 		String checkWord = "";
 		char[] val = word.toCharArray();
@@ -33,4 +34,13 @@ public class Noun extends Symbol {
 		}
 
 	}
+
+	public String getNoun_Value() {
+		return noun_Value;
+	}
+
+	public void setNoun_Value(String noun_Value) {
+		this.noun_Value = noun_Value;
+	}
+
 }
