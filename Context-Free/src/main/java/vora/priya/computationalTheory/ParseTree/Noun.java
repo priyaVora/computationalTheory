@@ -7,10 +7,14 @@ public class Noun extends Symbol {
 	List<String> listOfNouns;
 	String noun_Value;
 
+	String[] listofValidNouns;
+
 	public Noun() {
 		listOfNouns = new ArrayList<String>();
-		String nouns = " bear squirrel mouse cat tree rice girl boy";
+		String nouns = "bear squirrel mouse cat tree rice girl boy you I lack words world";
 		String[] eachNoun = nouns.split(" ");
+
+		listofValidNouns = eachNoun;
 		for (int i = 0; i < eachNoun.length; i++) {
 			listOfNouns.add(i, eachNoun[i]);
 		}
@@ -46,6 +50,14 @@ public class Noun extends Symbol {
 	@Override
 	public String toString() {
 		return noun_Value;
+	}
+
+	public String[] getListofValidNouns() {
+		return listofValidNouns;
+	}
+
+	public void setListofValidNouns(String[] listofValidNouns) {
+		this.listofValidNouns = listofValidNouns;
 	}
 
 }

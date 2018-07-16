@@ -7,10 +7,13 @@ public class Adjective extends Symbol {
 	List<String> listOfAdjectives;
 	String adjectiveValue;
 
+	String[] listOfValidAdjectives;
+
 	public Adjective() {
 		listOfAdjectives = new ArrayList<String>();
-		String adjs = " angry little depressed important friendly";
+		String adjs = "angry little depressed important friendly very bad extremely gorgeous ugly skinny muscular handsome lonely attractive odd weird good";
 		String[] eachAdj = adjs.split(" ");
+		listOfValidAdjectives = eachAdj;
 
 		for (int i = 0; i < eachAdj.length; i++) {
 			listOfAdjectives.add(i, eachAdj[i]);
@@ -47,6 +50,14 @@ public class Adjective extends Symbol {
 	@Override
 	public String toString() {
 		return adjectiveValue;
+	}
+
+	public String[] getListOfValidAdjectives() {
+		return listOfValidAdjectives;
+	}
+
+	public void setListOfValidAdjectives(String[] listOfValidAdjectives) {
+		this.listOfValidAdjectives = listOfValidAdjectives;
 	}
 
 }

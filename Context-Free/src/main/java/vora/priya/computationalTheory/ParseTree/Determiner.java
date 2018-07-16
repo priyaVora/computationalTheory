@@ -5,12 +5,16 @@ import java.util.List;
 
 public class Determiner extends Symbol {
 	List<String> listOfDeterminer;
-	String determiner_Value; 
+	String determiner_Value;
+
+	String[] listOfValidDeterminers;
 
 	public Determiner() {
 		listOfDeterminer = new ArrayList<String>();
-		String determiners = "the an that this my her";
+		String determiners = "the an that this my her a these those your it's our their each every enough such what rather quite one";
 		String[] eachDet = determiners.split(" ");
+
+		listOfValidDeterminers = eachDet;
 
 		for (int i = 0; i < eachDet.length; i++) {
 			listOfDeterminer.add(i, eachDet[i]);
@@ -48,4 +52,13 @@ public class Determiner extends Symbol {
 	public String toString() {
 		return determiner_Value;
 	}
+
+	public String[] getListOfValidDeterminers() {
+		return listOfValidDeterminers;
+	}
+
+	public void setListOfValidDeterminers(String[] listOfValidDeterminers) {
+		this.listOfValidDeterminers = listOfValidDeterminers;
+	}
+
 }

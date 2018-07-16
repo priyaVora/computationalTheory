@@ -3,11 +3,11 @@ package vora.priya.computationalTheory.Driver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Random;
 
+import vora.priya.computationalTheory.ParseTree.Adjective;
+import vora.priya.computationalTheory.ParseTree.Noun;
 import vora.priya.computationalTheory.ParseTree.ParseTree;
-import vora.priya.computationalTheory.ParseTree.Sentence;
 import vora.priya.computationalTheory.StateMachine.State_Machine;
 
 public class Driver {
@@ -52,56 +52,32 @@ public class Driver {
 
 	public String generateValidResponse(ParseTree parseTree) {
 		Random rand = new Random();
+		Adjective adjective = new Adjective();
+		Noun nouns = new Noun();
 		int randomNum = rand.nextInt(15);
+		
+		int response_random_generator = rand.nextInt(adjective.getListOfValidAdjectives().length);
+		int response_random_generatorNoun = rand.nextInt(nouns.getListofValidNouns().length);
+		
+		
 		if (randomNum < 3) {
-			return "How did you feel when you found out that " + parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case()
-							.getNomCombination()
-					+ "?";
+			return " That " + adjective.getListOfValidAdjectives()[response_random_generator] + " "  + parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+ " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
+					" " + nouns.getListofValidNouns()[response_random_generatorNoun];
 		} else if (randomNum == 3 || randomNum == 4) {
-			return "Oh I see, " + parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case()
-							.getNomCombination()
-					+ ", that is very odd...";
+			return " Those " + adjective.getListOfValidAdjectives()[response_random_generator] + " "  + parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+ " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
+					" " + nouns.getListofValidNouns()[response_random_generatorNoun];
 		} else if (randomNum == 5 || randomNum == 6) {
-			return "Oh no, " + parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case()
-							.getNomCombination()
-					+ ", I don't like that...!";
+			return " Our " + adjective.getListOfValidAdjectives()[response_random_generator] + " "  + parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+ " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
+					" " + nouns.getListofValidNouns()[response_random_generatorNoun];
 		} else if (randomNum == 7 || randomNum == 8) {
-			return "Did I hear this right, that " + parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case()
-							.getNomCombination()
-					+ "?";
+			return " Each " + adjective.getListOfValidAdjectives()[response_random_generator] + " "  + parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+ " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
+					" " + nouns.getListofValidNouns()[response_random_generatorNoun];
 		} else if (randomNum == 9 || randomNum == 10) {
-			return "Well since " + parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case()
-							.getNomCombination()
-					+ ", this world is getting weird day by day. Would you agree?";
+			return " Every " + adjective.getListOfValidAdjectives()[response_random_generator] + " "  + parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+ " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
+					" " + nouns.getListofValidNouns()[response_random_generatorNoun];
 		} else {
-			return "Yea that doesn't sound good to me... When you said, "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
-					+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case()
-							.getNomCombination()
-					+ ", I got a cold shiver in my body";
+			return " Such " + adjective.getListOfValidAdjectives()[response_random_generator] + " "  + parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case().getNoun()+ " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
+					" " + nouns.getListofValidNouns()[response_random_generatorNoun];
 		}
 	}
 }

@@ -27,7 +27,7 @@ public class Sentence extends Symbol {
 
 	@Override
 	public String toString() {
-		return "Sentence \n [noun_Phrase=" + noun_Phrase + "]"
+		return "Sentence /\n [noun_Phrase=" + noun_Phrase + "]"
 				+ ",\n[verb_Phrase=" + verb_Phrase + "]";
 	}
 }

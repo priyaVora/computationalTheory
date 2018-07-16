@@ -7,10 +7,12 @@ public class Verb extends Symbol {
 	List<String> listOfVerbs;
 	String verb_Value;
 
+	String[] listOfValidVerbs;
 	public Verb() {
 		listOfVerbs = new ArrayList<String>();
-		String verbs = "chased pushed walked moved ate ";
+		String verbs = "chased pushed walked moved ate understand did feel see found understood said getting sounds got shiver hearing";
 		String[] eachVerb = verbs.split(" ");
+		listOfValidVerbs = eachVerb;
 
 		for (int i = 0; i < eachVerb.length; i++) {
 			listOfVerbs.add(i, eachVerb[i]);
@@ -49,4 +51,11 @@ public class Verb extends Symbol {
 		return verb_Value;
 	}
 
+	public String[] getListOfValidVerbs() {
+		return listOfValidVerbs;
+	}
+
+	public void setListOfValidVerbs(String[] listOfValidVerbs) {
+		this.listOfValidVerbs = listOfValidVerbs;
+	}
 }
