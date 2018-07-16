@@ -9,7 +9,7 @@ public class Verb extends Symbol {
 
 	public Verb() {
 		listOfVerbs = new ArrayList<String>();
-		String verbs = " chased gave raises going morning eat";
+		String verbs = "chased pushed walked moved ate ";
 		String[] eachVerb = verbs.split(" ");
 
 		for (int i = 0; i < eachVerb.length; i++) {
@@ -42,6 +42,11 @@ public class Verb extends Symbol {
 
 	public void setVerb_Value(String verb_Value) {
 		this.verb_Value = verb_Value;
+	}
+
+	@Override
+	public String toString() {
+		return verb_Value;
 	}
 
 }

@@ -1,6 +1,6 @@
 package vora.priya.computationalTheory.ParseTree;
 
-public class Verb_Phrase extends Symbol{
+public class Verb_Phrase extends Symbol {
 	private Verb verb;
 	private Noun_Phrase noun_Phrase;
 
@@ -19,4 +19,10 @@ public class Verb_Phrase extends Symbol{
 	public void setNoun_Phrase(Noun_Phrase noun_Phrase) {
 		this.noun_Phrase = noun_Phrase;
 	}
+
+	@Override
+	public String toString() {
+		return "[verb=" + verb + ", noun_Phrase=" + noun_Phrase + "]";
+	}
+
 }

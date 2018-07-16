@@ -9,7 +9,7 @@ public class Noun extends Symbol {
 
 	public Noun() {
 		listOfNouns = new ArrayList<String>();
-		String nouns = " bear squirrel cotton rice tree california";
+		String nouns = " bear squirrel mouse cat tree rice girl boy";
 		String[] eachNoun = nouns.split(" ");
 		for (int i = 0; i < eachNoun.length; i++) {
 			listOfNouns.add(i, eachNoun[i]);
@@ -41,6 +41,11 @@ public class Noun extends Symbol {
 
 	public void setNoun_Value(String noun_Value) {
 		this.noun_Value = noun_Value;
+	}
+
+	@Override
+	public String toString() {
+		return noun_Value;
 	}
 
 }

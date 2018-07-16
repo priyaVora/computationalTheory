@@ -57,6 +57,7 @@ public class ParseTree {
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("Sentence")) {
 				if (stack.size() == 1) {
+					sentenceRecognized = (Sentence) stack.peek();
 					return true;
 				} else {
 					return false;
@@ -125,18 +126,22 @@ public class ParseTree {
 	}
 
 	private void checkIfSentence() {
+		Verb_Phrase vp = new Verb_Phrase();
+		Noun_Phrase np = new Noun_Phrase();
+		
+		
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("VP")) {
-				stack.pop();
+				vp = (Verb_Phrase) stack.pop();
 				if (stack.peek().getSymbol().equals("NP")) {
-					stack.pop();
+					np = (Noun_Phrase) stack.pop();
 					Sentence sentence = new Sentence();
 					sentence.setSymbol("Sentence");
+					sentence.setNoun_Phrase(np);
+					sentence.setVerb_Phrase(vp);
 					stack.push(sentence);
-				} else {
-					Nominative_Case nom = new Nominative_Case();
-					nom.setSymbol("Nom");
-					stack.push(nom);
+				} else { 
+					stack.push(vp);
 				}
 			}
 		}

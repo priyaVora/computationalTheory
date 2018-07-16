@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import vora.priya.computationalTheory.ParseTree.ParseTree;
+import vora.priya.computationalTheory.ParseTree.Sentence;
 import vora.priya.computationalTheory.StateMachine.State_Machine;
 
 public class Driver {
@@ -37,13 +38,18 @@ public class Driver {
 
 		ParseTree parseTree = new ParseTree();
 		boolean valid_response = parseTree.isSentence(testString);
-		
-		if(valid_response == true) { 
-			parseTree.printStack();
-			return "I understand you!";
-		} else { 
+
+		if (valid_response == true) {
+			//System.out.println("::: " + parseTree.getSentenceRecognized().toString());
+			//parseTree.printStack();
+			return "Oh I see, " + parseTree.getSentenceRecognized().getNoun_Phrase().getDeterminer() + " " +  parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNomCombination()
+					+ " " + parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() + " " + parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getDeterminer() + " "
+			+ parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case().getNomCombination() + ", that is very odd...";
+		} else {
 			parseTree.printStack();
 			return "Sorry, I didn't understand what you said, can you please repeat yourself?";
 		}
 	}
+	
+	
 }

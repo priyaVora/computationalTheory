@@ -24,4 +24,10 @@ public class Sentence extends Symbol {
 	public void setVerb_Phrase(Verb_Phrase verb_Phrase) {
 		this.verb_Phrase = verb_Phrase;
 	}
+
+	@Override
+	public String toString() {
+		return "Sentence \n [noun_Phrase=" + noun_Phrase + "]"
+				+ ",\n[verb_Phrase=" + verb_Phrase + "]";
+	}
 }

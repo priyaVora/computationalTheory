@@ -43,6 +43,9 @@ public class Determiner extends Symbol {
 	public void setDeterminer_Value(String determiner_Value) {
 		this.determiner_Value = determiner_Value;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return determiner_Value;
+	}
 }

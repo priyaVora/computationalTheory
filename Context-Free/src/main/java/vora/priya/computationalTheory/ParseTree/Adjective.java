@@ -3,7 +3,7 @@ package vora.priya.computationalTheory.ParseTree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adjective extends Symbol{
+public class Adjective extends Symbol {
 	List<String> listOfAdjectives;
 	String adjectiveValue;
 
@@ -42,5 +42,11 @@ public class Adjective extends Symbol{
 
 	public void setAdjectiveValue(String adjectiveValue) {
 		this.adjectiveValue = adjectiveValue;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return adjectiveValue;
+	}
+
 }

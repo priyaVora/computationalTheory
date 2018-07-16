@@ -23,6 +23,11 @@ public class Noun_Phrase extends Symbol{
 	public void setNominative_Case(Nominative_Case nominative_Case) {
 		this.nominative_Case = nominative_Case;
 	}
+
+	@Override
+	public String toString() {
+		return "[determiner=" + determiner + ", nominative_Case=" + nominative_Case + "]";
+	}
 	
 	
 }
