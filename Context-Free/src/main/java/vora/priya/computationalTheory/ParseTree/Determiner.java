@@ -9,7 +9,7 @@ public class Determiner extends Symbol {
 
 	public Determiner() {
 		listOfDeterminer = new ArrayList<String>();
-		String determiners = "the an that this my his her";
+		String determiners = "the an that this my her";
 		String[] eachDet = determiners.split(" ");
 
 		for (int i = 0; i < eachDet.length; i++) {
