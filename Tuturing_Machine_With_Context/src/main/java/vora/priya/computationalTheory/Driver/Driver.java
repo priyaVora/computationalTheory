@@ -44,7 +44,8 @@ public class Driver {
 			// parseTree.printStack();
 			return generateValidResponse(parseTree);
 		} else {
-
+			//parseTree.getSentenceRecognized().toString();
+			parseTree.printStack();
 			return "Sorry, I didn't understand what you said, can you please repeat yourself?";
 		}
 	}
@@ -75,19 +76,44 @@ public class Driver {
 				.getListOfValidVerb().length;
 		int rand = random.nextInt(size);
 		String responseFour = "During my college days, till now I like "
-				+ parseTree
-						.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb().getListOfValidVerb()[rand]
-				+ " a lot of things " +parseTree.getSentenceRecognized().getNoun_phrase().getPreposition() + " "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb()
+						.getListOfValidVerb()[rand]
+				+ " a lot of things " + parseTree.getSentenceRecognized().getNoun_phrase().getPreposition() + " "
 				+ parseTree.getSentenceRecognized().getNoun_phrase().getDeterminer() + " "
-				+ parseTree.getSentenceRecognized().getNoun_phrase().getNoun(); ;
+				+ parseTree.getSentenceRecognized().getNoun_phrase().getNoun();
+		;
 		responseList.add(responseFour);
 
-		String responseFive = "Despite that, I "
+		String responseFive = "Despite that, I can't stop "
 				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb() + " "
 				+ parseTree.getSentenceRecognized().getNoun_phrase().getPreposition() + " "
 				+ parseTree.getSentenceRecognized().getNoun_phrase().getDeterminer() + " "
 				+ parseTree.getSentenceRecognized().getNoun_phrase().getNoun();
 		responseList.add(responseFive);
+
+		String responseSix = "I have been thinking about "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb() + " " + "this weekend";
+		responseList.add(responseSix);
+		
+		String reponseSeven= "Do you know if your friends are okay with "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb() + " "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getNoun_after();
+		responseList.add(reponseSeven);
+		
+		String reponseEight= "Are you okay with "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb() + " "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getNoun_after();
+		responseList.add(reponseEight);
+		
+		String reponseNine= "Interesting tell me more about "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb() + " "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getNoun_after();
+		responseList.add(reponseNine);
+		
+		String reponseTen= "People can't stop talking about "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getSpecial_verb().getVerb() + " "
+				+ parseTree.getSentenceRecognized().getVerb_phrase().getNoun_after() + " go ahead tell me more about it...";
+		responseList.add(reponseTen);
 
 		int randRepsonse = random.nextInt(responseList.size());
 		return responseList.get(randRepsonse);
