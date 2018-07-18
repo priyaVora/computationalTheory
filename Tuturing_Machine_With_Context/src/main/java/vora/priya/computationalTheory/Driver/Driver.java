@@ -40,64 +40,17 @@ public class Driver {
 		boolean valid_response = parseTree.isSentence(testString);
 
 		if (valid_response == true) {
-			// System.out.println("::: " + parseTree.getSentenceRecognized().toString());
-			// parseTree.printStack();
+			 //System.out.println("::: " + parseTree.getSentenceRecognized().toString());
+			//parseTree.printStack();
 			return generateValidResponse(parseTree);
 		} else {
-			// parseTree.printStack();
+			 //parseTree.printStack();
 			return "Sorry, I didn't understand what you said, can you please repeat yourself?";
 		}
 	}
 
 	public String generateValidResponse(ParseTree parseTree) {
-		Random rand = new Random();
-		// Adjective adjective = new Adjective();
-		Noun nouns = new Noun();
-		int randomNum = rand.nextInt(15);
-
-		// int response_random_generator =
-		// rand.nextInt(adjective.getListOfValidAdjectives().length);
-		// int response_random_generatorNoun =
-		// rand.nextInt(nouns.getListofValidNouns().length);
-		//
-		//
-		// if (randomNum < 3) {
-		// return " That " +
-		// adjective.getListOfValidAdjectives()[response_random_generator] + " " +
-		// parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+
-		// " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
-		// " " + nouns.getListofValidNouns()[response_random_generatorNoun];
-		// } else if (randomNum == 3 || randomNum == 4) {
-		// return " Those " +
-		// adjective.getListOfValidAdjectives()[response_random_generator] + " " +
-		// parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+
-		// " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
-		// " " + nouns.getListofValidNouns()[response_random_generatorNoun];
-		// } else if (randomNum == 5 || randomNum == 6) {
-		// return " Our " +
-		// adjective.getListOfValidAdjectives()[response_random_generator] + " " +
-		// parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+
-		// " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
-		// " " + nouns.getListofValidNouns()[response_random_generatorNoun];
-		// } else if (randomNum == 7 || randomNum == 8) {
-		// return " Each " +
-		// adjective.getListOfValidAdjectives()[response_random_generator] + " " +
-		// parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+
-		// " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
-		// " " + nouns.getListofValidNouns()[response_random_generatorNoun];
-		// } else if (randomNum == 9 || randomNum == 10) {
-		// return " Every " +
-		// adjective.getListOfValidAdjectives()[response_random_generator] + " " +
-		// parseTree.getSentenceRecognized().getNoun_Phrase().getNominative_Case().getNoun()+
-		// " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
-		// " " + nouns.getListofValidNouns()[response_random_generatorNoun];
-		// } else {
-		// return " Such " +
-		// adjective.getListOfValidAdjectives()[response_random_generator] + " " +
-		// parseTree.getSentenceRecognized().getVerb_Phrase().getNoun_Phrase().getNominative_Case().getNoun()+
-		// " "+ parseTree.getSentenceRecognized().getVerb_Phrase().getVerb() +
-		// " " + nouns.getListofValidNouns()[response_random_generatorNoun];
-		// }
+		
 		return "This is the message";
 	}
 }

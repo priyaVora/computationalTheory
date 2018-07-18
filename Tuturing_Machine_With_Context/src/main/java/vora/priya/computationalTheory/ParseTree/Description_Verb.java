@@ -11,7 +11,7 @@ public class Description_Verb extends Symbol {
 
 	public Description_Verb() {
 		listOfDescriptionVerbs = new ArrayList<String>();
-		String descriptionVerb = "loves loved hates hated likes like hate love";
+		String descriptionVerb = "loves loved hates hated likes like";
 		String[] eachDescriptionVerb = descriptionVerb.split(" ");
 
 		listOfValidDescriptionVerb = eachDescriptionVerb;

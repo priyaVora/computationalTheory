@@ -42,13 +42,16 @@ public class ParseTree {
 		checkIfSpecialVerbExist();
 		checkIfSentence();
 		// boolean valid = checkIfStackContainsAValidSentence();
-		boolean valid = false;
-		printStack();
+		boolean valid = checkIfStackContainsAValidSentence();
+		//printStack();
 		return valid;
 	}
 
 	public boolean checkIfStackContainsAValidSentence() {
 		if (!(stack.isEmpty())) {
+			if(stack.peek().getSymbol() == null) { 
+				return false;
+			}
 			if (stack.peek().getSymbol().equals("Sentence")) {
 				if (stack.size() == 1) {
 					sentenceRecognized = (Sentence) stack.peek();
@@ -329,5 +332,13 @@ public class ParseTree {
 
 	private boolean tokenize(String userInput) {
 		return tokenizer.tokenize(userInput);
+	}
+	
+	public Sentence getSentenceRecognized() {
+		return sentenceRecognized;
+	}
+
+	public void setSentenceRecognized(Sentence sentenceRecognized) {
+		this.sentenceRecognized = sentenceRecognized;
 	}
 }
