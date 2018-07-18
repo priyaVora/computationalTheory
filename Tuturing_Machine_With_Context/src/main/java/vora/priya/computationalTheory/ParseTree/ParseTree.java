@@ -38,11 +38,29 @@ public class ParseTree {
 			}
 			counter = 0;
 		}
+		//checkIfNested_NounPhrase();
 		checkIfSpecialVerbExist();
+		checkIfSentence();
 		// boolean valid = checkIfStackContainsAValidSentence();
 		boolean valid = false;
 		printStack();
 		return valid;
+	}
+
+	public boolean checkIfStackContainsAValidSentence() {
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Sentence")) {
+				if (stack.size() == 1) {
+					sentenceRecognized = (Sentence) stack.peek();
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	private void checkIfSpecialVerbExist() {
@@ -82,13 +100,13 @@ public class ParseTree {
 
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("Noun")) {
-				beforeNoun = (Noun) stack.pop();
+				afterNoun = (Noun) stack.pop();
 				if (!(stack.isEmpty())) {
 					if (stack.peek().getSymbol().equals("Special Verb")) {
 						specialVerb = (Special_Verb) stack.pop();
 						if (!(stack.isEmpty())) {
 							if (stack.peek().getSymbol().equals("Noun")) {
-								afterNoun = (Noun) stack.pop();
+								beforeNoun = (Noun) stack.pop();
 								Verb_Phrase verb_Phrase = new Verb_Phrase();
 								verb_Phrase.setSymbol("Verb Phrase");
 								verb_Phrase.setNoun_before(beforeNoun);
@@ -102,14 +120,115 @@ public class ParseTree {
 							stack.push(specialVerb);
 						}
 					} else {
-						stack.push(beforeNoun);
+						stack.push(afterNoun);
 					}
 				} else {
-					stack.push(beforeNoun);
+					stack.push(afterNoun);
 				}
 			}
 		}
 
+		checkIfNounPhraseExist();
+
+	}
+
+	public void checkIfNounPhraseExist() {
+		Noun afterNoun = new Noun();
+		Determiner determiner = new Determiner();
+		Preposition prep = new Preposition();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Noun")) {
+				afterNoun = (Noun) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Determiner")) {
+						determiner = (Determiner) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Preposition")) {
+								prep = (Preposition) stack.pop();
+
+								Noun_Phrase noun_phrase = new Noun_Phrase();
+								noun_phrase.setSymbol("Noun Phrase");
+								noun_phrase.setNoun(afterNoun);
+								noun_phrase.setDeterminer(determiner);
+								noun_phrase.setPreposition(prep);
+
+								stack.push(noun_phrase);
+								checkIfNested_NounPhrase();
+							} else {
+								stack.push(determiner);
+							}
+						} else {
+							stack.push(determiner);
+						}
+					} else {
+						stack.push(afterNoun);
+					}
+				} else {
+					stack.push(afterNoun);
+				}
+			}
+		}
+	}
+
+	public void checkIfNested_NounPhrase() {
+		Noun_Phrase parentNounPhrase = new Noun_Phrase();
+		Noun_Phrase childNounPhrase = new Noun_Phrase();
+
+		Noun_Phrase combineNP = new Noun_Phrase();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Noun Phrase")) {
+				childNounPhrase = (Noun_Phrase) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Noun Phrase")) {
+						parentNounPhrase = (Noun_Phrase) stack.pop();
+						combineNP.setSymbol("Noun Phrase");
+						combineNP.setDeterminer(parentNounPhrase.getDeterminer());
+						combineNP.setPreposition(parentNounPhrase.getPreposition());
+						combineNP.setNoun(parentNounPhrase.getNoun());
+						combineNP.setNoun_phrase(childNounPhrase);
+						stack.push(combineNP);
+					} else { 
+						stack.push(childNounPhrase);
+					}
+
+				} else {
+					stack.push(childNounPhrase);
+				}
+			}
+		}
+
+	}
+
+	private void checkIfSentence() {
+		Noun_Phrase np = new Noun_Phrase();
+		Verb_Phrase vp = new Verb_Phrase();
+		Adverb adverb = new Adverb();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Noun Phrase")) {
+				np = (Noun_Phrase) stack.pop();
+				if (stack.peek().getSymbol().equals("Verb Phrase")) {
+					vp = (Verb_Phrase) stack.pop();
+					if (stack.peek().getSymbol().equals("Adverb")) {
+						adverb = (Adverb) stack.pop();
+
+						Sentence sentence = new Sentence();
+						sentence.setSymbol("Sentence");
+						sentence.setNoun_phrase(np);
+						sentence.setVerb_phrase(vp);
+						sentence.setAdverb(adverb);
+						stack.push(sentence);
+					} else {
+						stack.push(np);
+						stack.push(vp);
+					}
+				} else {
+					stack.push(vp);
+				}
+			}
+		}
 	}
 
 	private boolean checkIfStackCanBeReduced(Symbol symbol) {

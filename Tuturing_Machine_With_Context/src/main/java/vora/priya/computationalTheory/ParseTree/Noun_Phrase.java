@@ -1,6 +1,6 @@
 package vora.priya.computationalTheory.ParseTree;
 
-public class Noun_Phrase {
+public class Noun_Phrase extends Symbol {
 	Preposition preposition;
 	Determiner determiner;
 	Noun noun;
