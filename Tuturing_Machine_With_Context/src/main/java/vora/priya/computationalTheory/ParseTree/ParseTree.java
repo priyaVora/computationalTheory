@@ -38,18 +38,18 @@ public class ParseTree {
 			}
 			counter = 0;
 		}
-		//checkIfNested_NounPhrase();
+		// checkIfNested_NounPhrase();
 		checkIfSpecialVerbExist();
 		checkIfSentence();
 		// boolean valid = checkIfStackContainsAValidSentence();
 		boolean valid = checkIfStackContainsAValidSentence();
-		//printStack();
+		// printStack();
 		return valid;
 	}
 
 	public boolean checkIfStackContainsAValidSentence() {
 		if (!(stack.isEmpty())) {
-			if(stack.peek().getSymbol() == null) { 
+			if (stack.peek().getSymbol() == null) {
 				return false;
 			}
 			if (stack.peek().getSymbol().equals("Sentence")) {
@@ -57,6 +57,7 @@ public class ParseTree {
 					sentenceRecognized = (Sentence) stack.peek();
 					return true;
 				} else {
+					sentenceRecognized = null;
 					return false;
 				}
 			} else {
@@ -192,7 +193,7 @@ public class ParseTree {
 						combineNP.setNoun(parentNounPhrase.getNoun());
 						combineNP.setNoun_phrase(childNounPhrase);
 						stack.push(combineNP);
-					} else { 
+					} else {
 						stack.push(childNounPhrase);
 					}
 
@@ -333,7 +334,7 @@ public class ParseTree {
 	private boolean tokenize(String userInput) {
 		return tokenizer.tokenize(userInput);
 	}
-	
+
 	public Sentence getSentenceRecognized() {
 		return sentenceRecognized;
 	}
