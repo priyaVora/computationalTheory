@@ -10,9 +10,11 @@ public class ParseTree {
 
 	Stack<Symbol> stack = new Stack<Symbol>();
 	Sentence sentenceRecognized = new Sentence();
+	private String parseTreeResponse;
 
 	public ParseTree() {
 		tokenizer = new Tokenizer();
+		parseTreeResponse = null;
 	}
 
 	public boolean isSentence(String userInput) {
@@ -342,4 +344,13 @@ public class ParseTree {
 	public void setSentenceRecognized(Sentence sentenceRecognized) {
 		this.sentenceRecognized = sentenceRecognized;
 	}
+
+	public String getParseTreeResponse() {
+		return parseTreeResponse;
+	}
+
+	public void setParseTreeResponse(String parseTreeResponse) {
+		this.parseTreeResponse = parseTreeResponse;
+	}
+
 }
