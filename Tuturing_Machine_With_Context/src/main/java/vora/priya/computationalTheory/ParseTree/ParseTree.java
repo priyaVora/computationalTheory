@@ -46,7 +46,69 @@ public class ParseTree {
 	}
 
 	private void checkIfSpecialVerbExist() {
-		// TODO Auto-generated method stub
+		Description_Verb descriptiveVerb = new Description_Verb();
+		Verb verb = new Verb();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Verb")) {
+				verb = (Verb) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Description_Verb")) {
+						descriptiveVerb = (Description_Verb) stack.pop();
+						Special_Verb specialVerb = new Special_Verb();
+						specialVerb.setDesc_verb(descriptiveVerb);
+						specialVerb.setVerb(verb);
+						specialVerb.setSymbol("Special Verb");
+						stack.push(specialVerb);
+					} else {
+						Special_Verb specialVerb = new Special_Verb();
+						specialVerb.setSymbol("Special Verb");
+						specialVerb.setVerb(verb);
+						stack.push(specialVerb);
+					}
+
+				} else {
+					stack.push(verb);
+				}
+			}
+		}
+		checkIfVerbPhraseExist();
+	}
+
+	private void checkIfVerbPhraseExist() {
+		Noun beforeNoun = new Noun();
+		Special_Verb specialVerb = new Special_Verb();
+		Noun afterNoun = new Noun();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Noun")) {
+				beforeNoun = (Noun) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Special Verb")) {
+						specialVerb = (Special_Verb) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Noun")) {
+								afterNoun = (Noun) stack.pop();
+								Verb_Phrase verb_Phrase = new Verb_Phrase();
+								verb_Phrase.setSymbol("Verb Phrase");
+								verb_Phrase.setNoun_before(beforeNoun);
+								verb_Phrase.setSpecial_verb(specialVerb);
+								verb_Phrase.setNoun_after(afterNoun);
+								stack.push(verb_Phrase);
+							} else {
+								stack.push(specialVerb);
+							}
+						} else {
+							stack.push(specialVerb);
+						}
+					} else {
+						stack.push(beforeNoun);
+					}
+				} else {
+					stack.push(beforeNoun);
+				}
+			}
+		}
 
 	}
 
@@ -87,12 +149,22 @@ public class ParseTree {
 			Preposition preposition = new Preposition();
 			preposition.setSymbol("Preposition");
 			preposition.setPreposition_Value(symbol.getSymbol());
-
 			stack.pop();
 			stack.push(preposition);
 			return true;
+		} else if (checkifStackCanReduceTo_Determiners() == true) {
+			Determiner determiner = new Determiner();
+			determiner.setSymbol("Determiner");
+			determiner.setDet_Value(symbol.getSymbol());
+			stack.pop();
+			stack.push(determiner);
 		}
 		return false;
+	}
+
+	private boolean checkifStackCanReduceTo_Determiners() {
+		Determiner determiner = new Determiner();
+		return determiner.isDeterminer(stack.peek().getSymbol());
 	}
 
 	private boolean checkifStackCanReduceTo_Preposition() {

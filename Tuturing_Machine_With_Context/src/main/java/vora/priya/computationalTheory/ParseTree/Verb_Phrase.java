@@ -1,6 +1,6 @@
 package vora.priya.computationalTheory.ParseTree;
 
-public class Verb_Phrase {
+public class Verb_Phrase extends Symbol {
 	Noun noun_before;
 	Special_Verb special_verb;
 	Noun noun_after;
