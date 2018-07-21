@@ -6,13 +6,42 @@ public class TuringMachine {
 	public State state;
 	Tape tape;
 	String equation;
-	private State_Start start;
-	private STATE_REDUCE_ONE reduceOne_State;
-	private STATE_REDUCE_E_Number reduce_E_Number;
+
+	private State_Start stateStart;
+	private State_B stateB;
+	private State_C stateC;
+	private State_D stateD;
+	private State_E stateE;
+	private State_F stateF;
+	private State_G stateG;
+	private State_X stateX;
+	private EqualState equalState;
+	private EndState endState;
+	private State_Halt haltState;
+
+	private Extra extra;
+	private Extra2 extra2;
 
 	public TuringMachine(String equation) {
-		this.setState(reduceOne_State);
+		setStates();
+		this.setState(stateStart);
 		setAllStates_Tape();
+	}
+
+	public void setStates() {
+		stateStart = new State_Start(this);
+		haltState = new State_Halt(this);
+		stateB = new State_B(this);
+		stateC = new State_C(this);
+		stateD = new State_D(this);
+		stateE = new State_E(this);
+		stateF = new State_F(this);
+		stateG = new State_G(this);
+		stateX = new State_X(this);
+		equalState = new EqualState(this);
+		endState = new EndState(this);
+		extra = new Extra(this);
+		extra2 = new Extra2(this);
 	}
 
 	public void calculate() {
@@ -20,9 +49,6 @@ public class TuringMachine {
 	}
 
 	public void setAllStates_Tape() {
-		this.start = new State_Start(this);
-		this.reduce_E_Number = new STATE_REDUCE_E_Number(this);
-		this.reduceOne_State = new STATE_REDUCE_ONE(this);
 		this.equation = equation;
 		this.tape = new Tape(equation);
 	}
@@ -33,5 +59,125 @@ public class TuringMachine {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public Tape getTape() {
+		return tape;
+	}
+
+	public void setTape(Tape tape) {
+		this.tape = tape;
+	}
+
+	public String getEquation() {
+		return equation;
+	}
+
+	public void setEquation(String equation) {
+		this.equation = equation;
+	}
+
+	public State_Start getStateStart() {
+		return stateStart;
+	}
+
+	public void setStateStart(State_Start stateStart) {
+		this.stateStart = stateStart;
+	}
+
+	public State_B getStateB() {
+		return stateB;
+	}
+
+	public void setStateB(State_B stateB) {
+		this.stateB = stateB;
+	}
+
+	public State_C getStateC() {
+		return stateC;
+	}
+
+	public void setStateC(State_C stateC) {
+		this.stateC = stateC;
+	}
+
+	public State_D getStateD() {
+		return stateD;
+	}
+
+	public void setStateD(State_D stateD) {
+		this.stateD = stateD;
+	}
+
+	public State_E getStateE() {
+		return stateE;
+	}
+
+	public void setStateE(State_E stateE) {
+		this.stateE = stateE;
+	}
+
+	public State_F getStateF() {
+		return stateF;
+	}
+
+	public void setStateF(State_F stateF) {
+		this.stateF = stateF;
+	}
+
+	public State_G getStateG() {
+		return stateG;
+	}
+
+	public void setStateG(State_G stateG) {
+		this.stateG = stateG;
+	}
+
+	public State_X getStateX() {
+		return stateX;
+	}
+
+	public void setStateX(State_X stateX) {
+		this.stateX = stateX;
+	}
+
+	public State_Halt getHaltState() {
+		return haltState;
+	}
+
+	public void setHaltState(State_Halt haltState) {
+		this.haltState = haltState;
+	}
+
+	public EqualState getEqualState() {
+		return equalState;
+	}
+
+	public void setEqualState(EqualState equalState) {
+		this.equalState = equalState;
+	}
+
+	public EndState getEndState() {
+		return endState;
+	}
+
+	public void setEndState(EndState endState) {
+		this.endState = endState;
+	}
+
+	public Extra getExtra() {
+		return extra;
+	}
+
+	public void setExtra(Extra extra) {
+		this.extra = extra;
+	}
+
+	public Extra2 getExtra2() {
+		return extra2;
+	}
+
+	public void setExtra2(Extra2 extra2) {
+		this.extra2 = extra2;
 	}
 }

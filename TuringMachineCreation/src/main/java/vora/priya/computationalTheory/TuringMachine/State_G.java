@@ -1,11 +1,16 @@
 package vora.priya.computationalTheory.TuringMachine;
 
-public class STATE_REDUCE_E_Number implements State {
+public class State_G implements State {
 
 	private TuringMachine machine;
 
-	public STATE_REDUCE_E_Number(TuringMachine turingMachine) {
-		this.setMachine(turingMachine);
+	public State_G(TuringMachine machine) {
+		this.setMachine(machine);
+	}
+
+	public void getNextState(String see, String write, String direction) {
+		System.out.println("Transitioned to State C");
+		this.machine.setState(this.machine.getStateC());
 	}
 
 	public TuringMachine getMachine() {
@@ -19,8 +24,4 @@ public class STATE_REDUCE_E_Number implements State {
 		this.machine = machine;
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		// TODO Auto-generated method stub
-
-	}
 }
