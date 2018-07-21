@@ -8,12 +8,6 @@ public class Tape {
 	public Tape(String equation) {
 		createTape(equation);
 		this.equation = equation;
-		printTape();
-	}
-
-	public static void main(String[] args) {
-		Tape tape = new Tape("126+19");
-
 	}
 
 	private void createTape(String equation) {
@@ -51,11 +45,11 @@ public class Tape {
 		}
 	}
 
-	private void shiftLeft() {
+	public void shiftLeft() {
 		head--;
 	}
 
-	private void shiftRight() {
+	public void shiftRight() {
 		head++;
 	}
 

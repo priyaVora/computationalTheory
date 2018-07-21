@@ -8,31 +8,31 @@ public class State_D implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		boolean currentIs9 = checkIfNine(see);
-		boolean currentIsNumber = checkIfNumber(see);
-		boolean currentIsE = see.equals("E");
-
-		boolean overWriteZero = (Integer.parseInt(write) == 0);
-		boolean overWriteOne = (Integer.parseInt(write) == 1);
-		boolean overWriteAdd = write.equals("X+1");
-
-		boolean directionIsLeft = direction.equals("left");
-		boolean directionRight = direction.equals("right");
-
-		if (currentIs9 == true && overWriteZero == true && directionIsLeft == true) {
-			System.out.println("Transitioned to State D");
-			this.machine.setState(this.machine.getStateD());
-		} else if (currentIsE == true && overWriteOne == true && directionRight == true) {
-			System.out.println("Transitioned to State E");
-			this.machine.setState(this.machine.getStateE());
-		} else if (currentIsNumber == true && overWriteAdd == true && directionRight == true) {
-			System.out.println("Transitioned to State E");
-			this.machine.setState(this.machine.getStateE());
-		} else {
-			System.out.println("Failed....");
-			this.machine.setState(this.machine.getStateStart());
-		}
+	public void getNextState(String see) {
+//		boolean currentIs9 = checkIfNine(see);
+//		boolean currentIsNumber = checkIfNumber(see);
+//		boolean currentIsE = see.equals("E");
+//
+//		boolean overWriteZero = (Integer.parseInt(write) == 0);
+//		boolean overWriteOne = (Integer.parseInt(write) == 1);
+//		boolean overWriteAdd = write.equals("X+1");
+//
+//		boolean directionIsLeft = direction.equals("left");
+//		boolean directionRight = direction.equals("right");
+//
+//		if (currentIs9 == true && overWriteZero == true && directionIsLeft == true) {
+//			System.out.println("Transitioned to State D");
+//			this.machine.setState(this.machine.getStateD());
+//		} else if (currentIsE == true && overWriteOne == true && directionRight == true) {
+//			System.out.println("Transitioned to State E");
+//			this.machine.setState(this.machine.getStateE());
+//		} else if (currentIsNumber == true && overWriteAdd == true && directionRight == true) {
+//			System.out.println("Transitioned to State E");
+//			this.machine.setState(this.machine.getStateE());
+//		} else {
+//			System.out.println("Failed....");
+//			this.machine.setState(this.machine.getStateStart());
+//		}
 
 	}
 

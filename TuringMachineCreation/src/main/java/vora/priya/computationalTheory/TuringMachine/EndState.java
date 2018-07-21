@@ -8,7 +8,7 @@ public class EndState implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
+	public void getNextState(String see) {
 		System.out.println("Transitioned to Halt State");
 		this.machine.setState(this.machine.getHaltState());
 	}

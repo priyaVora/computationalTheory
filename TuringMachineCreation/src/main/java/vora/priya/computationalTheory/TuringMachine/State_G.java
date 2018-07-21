@@ -8,7 +8,7 @@ public class State_G implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
+	public void getNextState(String see) {
 		System.out.println("Transitioned to State C");
 		this.machine.setState(this.machine.getStateC());
 	}

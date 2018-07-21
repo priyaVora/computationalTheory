@@ -8,14 +8,14 @@ public class EqualState implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		if (checkIfNumber(see) == true && checkIfNumber(write) == true && direction.equals("E")) {
-			System.out.println("Transitioned to End State");
-			this.machine.setState(this.machine.getEndState());
-		} else {
-			System.out.println("Failed...");
-			this.machine.setState(this.machine.getStateStart());
-		}
+	public void getNextState(String see) {
+//		if (checkIfNumber(see) == true && checkIfNumber(write) == true && direction.equals("E")) {
+//			System.out.println("Transitioned to End State");
+//			this.machine.setState(this.machine.getEndState());
+//		} else {
+//			System.out.println("Failed...");
+//			this.machine.setState(this.machine.getStateStart());
+//		}
 	}
 
 	public boolean checkIfNumber(String value) {

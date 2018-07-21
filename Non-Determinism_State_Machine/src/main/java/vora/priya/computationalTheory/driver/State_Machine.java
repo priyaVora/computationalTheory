@@ -129,7 +129,7 @@ public class State_Machine {
 	private State_RRR state_RRR;
 	private State_WWW state_WWW;
 	private State_DDD state_DDD;
-	private State_PPP state_PPP;
+	private State_PPP state_PPP;		this.equation = equation;
 
 	private String recognizedWord = "";
 

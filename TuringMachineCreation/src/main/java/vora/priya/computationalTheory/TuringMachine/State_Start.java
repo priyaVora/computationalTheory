@@ -7,23 +7,47 @@ public class State_Start implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
+	public void getNextState(String see) {
+		String direction = setDirection(see);
+		char write = setWrite(see);
 
-		boolean currentIsE = see.equals("E");
-		boolean overWriteIsE = write.equals("E");
-		boolean directionSymbol = direction.equals("left");
+		if (direction.equals("left")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.getTape().shiftLeft();
 
-		if (currentIsE == true && overWriteIsE == true && directionSymbol == true) {
+			// Make the transtion!
 			this.machine.setState(this.machine.getStateB());
-			System.out.println("Transitioned to State B");
-		} else if (currentIsE == false && overWriteIsE == false && directionSymbol == false) {
-			this.machine.setState(this.machine.getStateStart());
-			System.out.println("Transitioned back to Start");
-		} else { 
-			System.out.println("Failed...");
+		} else if (direction.equals("right")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.getTape().shiftRight();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
 			this.machine.setState(this.machine.getStateStart());
 		}
 
+	}
+
+	public char setWrite(String userValue) {
+		if (userValue.equals("E")) {
+			return 'E';
+		} else if (!(userValue.equals("E"))) {
+			char replace = this.machine.getTape().getTapeArray()[this.machine.getTape().getHead()];
+			return replace;
+		} else {
+			return 'E';
+		}
+	}
+
+	public String setDirection(String userValue) {
+		if (userValue.equals("E")) {
+			return "left";
+		} else if (!(userValue.equals("E"))) {
+			return "right";
+		} else {
+			return "right";
+		}
 	}
 
 	public TuringMachine getMachine() {

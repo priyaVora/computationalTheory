@@ -8,14 +8,14 @@ public class State_X implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		if (see.equals("0") && write.equals("0") && direction.equals("left")) {
-			System.out.println("Transitioned to State Extra");
-			this.machine.setState(this.machine.getExtra());
-		} else if (checkIfNumber(see) == true && write.equals("X--") && direction.equals("left")) {
-			System.out.println("Transitioned to State C");
-			this.machine.setState(this.machine.getStateC());
-		}
+	public void getNextState(String see) {
+//		if (see.equals("0") && write.equals("0") && direction.equals("left")) {
+//			System.out.println("Transitioned to State Extra");
+//			this.machine.setState(this.machine.getExtra());
+//		} else if (checkIfNumber(see) == true && write.equals("X--") && direction.equals("left")) {
+//			System.out.println("Transitioned to State C");
+//			this.machine.setState(this.machine.getStateC());
+//		}
 	}
 
 	public boolean checkIfNumber(String value) {

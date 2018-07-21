@@ -8,14 +8,14 @@ public class Extra implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		if (checkIfNumber(see) == true && write.equals("X--") && direction.equals("right")) {
-			System.out.println("Transitioned to Extra 2");
-			this.machine.setState(this.machine.getExtra2());
-		} else {
-			System.out.println("Failed...");
-			this.machine.setState(this.machine.getStateStart());
-		}
+	public void getNextState(String see) {
+//		if (checkIfNumber(see) == true && write.equals("X--") && direction.equals("right")) {
+//			System.out.println("Transitioned to Extra 2");
+//			this.machine.setState(this.machine.getExtra2());
+//		} else {
+//			System.out.println("Failed...");
+//			this.machine.setState(this.machine.getStateStart());
+//		}
 	}
 
 	public boolean checkIfNumber(String value) {

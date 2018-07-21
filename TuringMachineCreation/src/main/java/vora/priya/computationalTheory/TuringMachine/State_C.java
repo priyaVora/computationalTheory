@@ -8,21 +8,21 @@ public class State_C implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		boolean directionIsLeft = direction.equals("left");
-		boolean currentIsEquals = see.equals("=");
-		boolean overWrite = write.equals("=");
-
-		if (currentIsEquals == false && overWrite == false && directionIsLeft == true) {
-			System.out.println("Transitioned back to C");
-			this.machine.setState(this.machine.getStateC());
-		} else if (currentIsEquals == true && overWrite == true && directionIsLeft == true) {
-			System.out.println("Transition to State D");
-			this.machine.setState(this.machine.getStateD());
-		} else {
-			System.out.println("Failed...");
-			this.machine.setState(this.machine.getStateStart());
-		}
+	public void getNextState(String see) {
+//		boolean directionIsLeft = direction.equals("left");
+//		boolean currentIsEquals = see.equals("=");
+//		boolean overWrite = write.equals("=");
+//
+//		if (currentIsEquals == false && overWrite == false && directionIsLeft == true) {
+//			System.out.println("Transitioned back to C");
+//			this.machine.setState(this.machine.getStateC());
+//		} else if (currentIsEquals == true && overWrite == true && directionIsLeft == true) {
+//			System.out.println("Transition to State D");
+//			this.machine.setState(this.machine.getStateD());
+//		} else {
+//			System.out.println("Failed...");
+//			this.machine.setState(this.machine.getStateStart());
+//		}
 	}
 
 	public TuringMachine getMachine() {

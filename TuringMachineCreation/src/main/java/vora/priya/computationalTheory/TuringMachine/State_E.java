@@ -8,7 +8,7 @@ public class State_E implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
+	public void getNextState(String see) {
 		System.out.println("Goes Back to Start --- Reached E");
 		this.machine.setState(this.machine.getStateE());
 	}

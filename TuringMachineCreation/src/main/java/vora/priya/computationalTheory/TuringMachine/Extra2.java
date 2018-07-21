@@ -8,14 +8,14 @@ public class Extra2 implements State {
 		this.setMachine(machine);
 	}
 
-	public void getNextState(String see, String write, String direction) {
-		if (see.equals("0") && write.equals("9") && direction.equals("left")) {
-			System.out.println("Transistioned to State C");
-			this.machine.setState(this.machine.getStateC());
-		} else {
-			System.out.println("Failed...");
-			this.machine.setState(this.machine.getStateStart());
-		}
+	public void getNextState(String see) {
+//		if (see.equals("0") && write.equals("9") && direction.equals("left")) {
+//			System.out.println("Transistioned to State C");
+//			this.machine.setState(this.machine.getStateC());
+//		} else {
+//			System.out.println("Failed...");
+//			this.machine.setState(this.machine.getStateStart());
+//		}
 	}
 
 	public TuringMachine getMachine() {
