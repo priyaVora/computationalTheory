@@ -9,31 +9,54 @@ public class State_B implements State {
 	}
 
 	public void getNextState(String see) {
-//		boolean currentIsEquals = see.equals("=");
-//		boolean currentIsZero = see.equals("0");
-//		boolean currentIsNumber = checkIfNumber(see);
-//
-//		boolean overWriteIsNumberSubtraction = write.equals("X--");
-//		boolean overWriteisEquals = write.equals("=");
-//		boolean overWriteIsE = write.equals("E");
-//
-//		boolean directionIsLeft = direction.equals("left");
-//		boolean directionIsRight = direction.equals("right");
-//		boolean directionIsE = direction.equals("E");
-//
-//		if (currentIsEquals == true && overWriteisEquals == true && directionIsE == true) {
-//			this.machine.setState(this.machine.getHaltState());
-//			System.out.println("Reached the Halt State");
-//		} else if (currentIsNumber == true && overWriteIsNumberSubtraction == true && directionIsLeft == true) {
-//			this.machine.setState(this.machine.getStateC());
-//			System.out.println("Tranitioning to State C");
-//		} else if (currentIsZero == true && write.equals("0")&& directionIsLeft == true) {
-//			this.machine.setState(this.machine.getStateF());
-//			System.out.println("Transitioned to Stat F");
-//		} else {
-//			System.out.println("Failed");
-//			this.machine.setState(this.machine.getStateStart());
-//		}
+		String direction = setDirection(see);
+		char write = setWrite(see);
+
+		if (see.equals("=") && direction.equals("E")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.setState(this.machine.getHaltState());
+			System.out.println("Transitioned to Halt State");
+		} else if (see.equals("0") && direction.equals("left")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.setState(this.machine.getStateF());
+			this.machine.getTape().shiftLeft();
+			System.out.println("Transitioned to State F");
+		} else if (checkIfNumber(see) == true && direction.equals("left")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.setState(this.machine.getStateC());
+			this.machine.getTape().shiftLeft();
+			System.out.println("Transitioned to State C");
+		}
+
+	}
+
+	public char setWrite(String userValue) {
+		if (userValue.equals("=")) {
+			return '=';
+		} else if (checkIfNumber(userValue) == true) {
+			int positionValue = this.machine.getTape().getTapeArray()[this.machine.getTape().getHead()];
+			return (char) (positionValue - 1);
+		} else if (userValue.equals("0")) {
+			return '0';
+		} else {
+			return 'x';
+		}
+	}
+
+	public String setDirection(String userValue) {
+		if (userValue.equals("=")) {
+			return "E";
+		} else if (checkIfNumber(userValue) == true) {
+			int positionValue = this.machine.getTape().getTapeArray()[this.machine.getTape().getHead()];
+			return "left";
+		} else if (userValue.equals("0")) {
+			return "left";
+		} else {
+			return "E";
+		}
 	}
 
 	public TuringMachine getMachine() {
