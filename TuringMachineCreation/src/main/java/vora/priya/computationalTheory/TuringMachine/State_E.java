@@ -10,7 +10,7 @@ public class State_E implements State {
 
 	public void getNextState(String see) {
 		System.out.println("Goes Back to Start --- Reached E");
-		this.machine.setState(this.machine.getStateE());
+		this.machine.setState(this.machine.getStateStart());
 	}
 
 	public TuringMachine getMachine() {

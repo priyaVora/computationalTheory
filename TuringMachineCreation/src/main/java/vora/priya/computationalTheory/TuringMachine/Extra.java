@@ -9,16 +9,37 @@ public class Extra implements State {
 	}
 
 	public void getNextState(String see) {
-//		if (checkIfNumber(see) == true && write.equals("X--") && direction.equals("right")) {
-//			System.out.println("Transitioned to Extra 2");
-//			this.machine.setState(this.machine.getExtra2());
-//		} else {
-//			System.out.println("Failed...");
-//			this.machine.setState(this.machine.getStateStart());
-//		}
+		String direction = setDirection(see);
+		char write = setWrite(see);
+		if (direction.equals("right")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.getTape().shiftRight();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getExtra2());
+		}
+	}
+
+	public char setWrite(String userValue) {
+		if (checkIfNumber(userValue) == true) {
+			int positionValue = this.machine.getTape().getTapeArray()[this.machine.getTape().getHead()];
+			return (char) (positionValue - 1);
+		} else {
+			return 'E';
+		}
+	}
+
+	public String setDirection(String userValue) {
+		if (checkIfNumber(userValue) == true) {
+			return "right";
+		} else {
+			return "E";
+		}
 	}
 
 	public boolean checkIfNumber(String value) {
+		System.out.println("USER INPUT " + value);
 		if (Integer.parseInt(value) > 0 && Integer.parseInt(value) < 10) {
 			return true;
 		}

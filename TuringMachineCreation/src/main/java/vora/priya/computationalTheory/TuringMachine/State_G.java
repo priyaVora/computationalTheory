@@ -9,8 +9,14 @@ public class State_G implements State {
 	}
 
 	public void getNextState(String see) {
-		System.out.println("Transitioned to State C");
-		this.machine.setState(this.machine.getStateC());
+		if(see.equals("0")) { 
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = '9';
+			this.machine.getTape().shiftLeft();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getStateC());
+		}
 	}
 
 	public TuringMachine getMachine() {

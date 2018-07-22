@@ -9,13 +9,10 @@ public class EqualState implements State {
 	}
 
 	public void getNextState(String see) {
-//		if (checkIfNumber(see) == true && checkIfNumber(write) == true && direction.equals("E")) {
-//			System.out.println("Transitioned to End State");
-//			this.machine.setState(this.machine.getEndState());
-//		} else {
-//			System.out.println("Failed...");
-//			this.machine.setState(this.machine.getStateStart());
-//		}
+		if (checkIfNumber(see) == true) {
+			this.machine.setState(this.machine.getEndState());
+			System.out.println("Transitioned to End State");
+		}
 	}
 
 	public boolean checkIfNumber(String value) {

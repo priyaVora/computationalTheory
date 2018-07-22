@@ -9,9 +9,18 @@ public class State_B implements State {
 	}
 
 	public void getNextState(String see) {
+
+		if (see.equals("+")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = 'E';
+			this.machine.getTape().shiftLeft();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getStateB());
+			
+		}
 		String direction = setDirection(see);
 		char write = setWrite(see);
-
 		if (see.equals("=") && direction.equals("E")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
@@ -64,6 +73,9 @@ public class State_B implements State {
 	}
 
 	public boolean checkIfNumber(String value) {
+		if(value.equals("+")) { 
+			return false;
+		}
 		if (Integer.parseInt(value) > 0 && Integer.parseInt(value) < 10) {
 			return true;
 		}

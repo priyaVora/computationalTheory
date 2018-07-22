@@ -9,20 +9,45 @@ public class State_C implements State {
 	}
 
 	public void getNextState(String see) {
-//		boolean directionIsLeft = direction.equals("left");
-//		boolean currentIsEquals = see.equals("=");
-//		boolean overWrite = write.equals("=");
-//
-//		if (currentIsEquals == false && overWrite == false && directionIsLeft == true) {
-//			System.out.println("Transitioned back to C");
-//			this.machine.setState(this.machine.getStateC());
-//		} else if (currentIsEquals == true && overWrite == true && directionIsLeft == true) {
-//			System.out.println("Transition to State D");
-//			this.machine.setState(this.machine.getStateD());
-//		} else {
-//			System.out.println("Failed...");
-//			this.machine.setState(this.machine.getStateStart());
-//		}
+		String direction = setDirection(see);
+		char write = setWrite(see);
+
+		if (see.equals("=") && direction.equals("left")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.getTape().shiftLeft();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getStateD());
+		} else if (!(see.equals("=")) && direction.equals("left")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.getTape().shiftLeft();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getStateC());
+		}
+	}
+
+	public char setWrite(String userValue) {
+		if (userValue.equals("=")) {
+			return '=';
+		} else if (!(userValue.equals("="))) {
+			char replace = this.machine.getTape().getTapeArray()[this.machine.getTape().getHead()];
+			return replace;
+		} else {
+			return '-';
+		}
+	}
+
+	public String setDirection(String userValue) {
+		if (userValue.equals("=")) {
+			return "left";
+		} else if (!(userValue.equals("="))) {
+			return "left";
+		} else {
+			return "E";
+		}
 	}
 
 	public TuringMachine getMachine() {
