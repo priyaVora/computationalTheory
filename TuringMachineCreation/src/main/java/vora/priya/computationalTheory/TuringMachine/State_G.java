@@ -15,7 +15,7 @@ public class State_G implements State {
 			this.machine.getTape().shiftRight();
 			System.out.println("Head: " + this.machine.getTape().getHead());
 
-			this.machine.setState(this.machine.getStateC());
+			this.machine.setState(this.machine.getCheck());
 		} else if(see.equals("E")) { 
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = 'E';
