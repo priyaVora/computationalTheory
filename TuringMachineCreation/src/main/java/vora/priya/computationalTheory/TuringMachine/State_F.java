@@ -15,11 +15,11 @@ public class State_F implements State {
 		
 		if(see.equals("0")) { 
 			int position = this.machine.getTape().getHead();
-			this.machine.getTape().getTapeArray()[position] = 'E';
+			this.machine.getTape().getTapeArray()[position] = '0';
 			this.machine.getTape().shiftLeft();
 			System.out.println("Head: " + this.machine.getTape().getHead());
 
-			this.machine.setState(this.machine.getStateB());
+			this.machine.setState(this.machine.getStateF());
 		} 
 		
 		

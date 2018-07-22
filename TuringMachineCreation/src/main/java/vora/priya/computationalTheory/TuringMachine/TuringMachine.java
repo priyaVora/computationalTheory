@@ -21,6 +21,7 @@ public class TuringMachine {
 
 	private Extra extra;
 	private Extra2 extra2;
+	private Check check;
 
 	public TuringMachine(String equation) {
 		setStates();
@@ -42,6 +43,7 @@ public class TuringMachine {
 		endState = new EndState(this);
 		extra = new Extra(this);
 		extra2 = new Extra2(this);
+		check = new Check(this);
 	}
 
 	public String calculate(String userInput) {
@@ -67,9 +69,9 @@ public class TuringMachine {
 				this.tape.printTape();
 				currentState = this.getState();
 				counter++;
-				if(currentState.equals(this.haltState)) { 
+				if (currentState.equals(this.haltState)) {
 					break loop;
-					
+
 				}
 			}
 		}
@@ -209,4 +211,13 @@ public class TuringMachine {
 	public void setExtra2(Extra2 extra2) {
 		this.extra2 = extra2;
 	}
+
+	public Check getCheck() {
+		return check;
+	}
+
+	public void setCheck(Check check) {
+		this.check = check;
+	}
+
 }

@@ -11,6 +11,15 @@ public class Extra implements State {
 	public void getNextState(String see) {
 		String direction = setDirection(see);
 		char write = setWrite(see);
+		
+		if(see.equals("0")) { 
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = '0';
+			this.machine.getTape().shiftLeft();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getExtra());
+		}
 		if (direction.equals("right")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
@@ -25,6 +34,8 @@ public class Extra implements State {
 		if (checkIfNumber(userValue) == true) {
 			int positionValue = this.machine.getTape().getTapeArray()[this.machine.getTape().getHead()];
 			return (char) (positionValue - 1);
+		} else if (userValue.equals("0")) {
+			return '0';
 		} else {
 			return 'E';
 		}
@@ -33,7 +44,11 @@ public class Extra implements State {
 	public String setDirection(String userValue) {
 		if (checkIfNumber(userValue) == true) {
 			return "right";
-		} else {
+		} else if (userValue.equals("0")) {
+			return "left";
+		}
+
+		else {
 			return "E";
 		}
 	}

@@ -15,6 +15,13 @@ public class Extra2 implements State {
 		if (see.equals("0") && direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
+			this.machine.getTape().shiftRight();
+			System.out.println("Head: " + this.machine.getTape().getHead());
+
+			this.machine.setState(this.machine.getExtra2());
+		} else if(see.equals("E")) {
+			int position = this.machine.getTape().getHead();
+			this.machine.getTape().getTapeArray()[position] = 'E';
 			this.machine.getTape().shiftLeft();
 			System.out.println("Head: " + this.machine.getTape().getHead());
 

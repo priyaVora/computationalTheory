@@ -16,7 +16,7 @@ public class EqualState implements State {
 	}
 
 	public boolean checkIfNumber(String value) {
-		if (Integer.parseInt(value) > 0 && Integer.parseInt(value) < 10) {
+		if (Integer.parseInt(value) > -1 && Integer.parseInt(value) < 10) {
 			return true;
 		}
 		return false;
