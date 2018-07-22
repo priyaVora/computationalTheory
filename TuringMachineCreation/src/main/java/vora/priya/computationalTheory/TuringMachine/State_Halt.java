@@ -20,7 +20,7 @@ public class State_Halt implements State {
 	}
 
 	public void getNextState(String see) {
-		System.out.println("HALT STATE Reached...");
+		//System.out.println("HALT STATE Reached...");
 		this.machine.setState(this.machine.getHaltState());
 	}
 

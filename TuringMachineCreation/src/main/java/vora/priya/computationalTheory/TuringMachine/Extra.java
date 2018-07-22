@@ -11,12 +11,12 @@ public class Extra implements State {
 	public void getNextState(String see) {
 		String direction = setDirection(see);
 		char write = setWrite(see);
-		
-		if(see.equals("0")) { 
+
+		if (see.equals("0")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = '0';
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getExtra());
 		}
@@ -24,7 +24,7 @@ public class Extra implements State {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftRight();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getExtra2());
 		}

@@ -16,14 +16,14 @@ public class State_C implements State {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			//System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateD());
 		} else if (!(see.equals("=")) && direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			//System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateC());
 		}

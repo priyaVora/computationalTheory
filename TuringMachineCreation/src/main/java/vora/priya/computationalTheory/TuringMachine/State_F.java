@@ -11,37 +11,35 @@ public class State_F implements State {
 	public void getNextState(String see) {
 		String direction = setDirection(see);
 		char write = setWrite(see);
-		
-		
-		if(see.equals("0")) { 
+
+		if (see.equals("0")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = '0';
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateF());
-		} 
-		
-		
+		}
+
 		if (see.equals("=") && direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getEqualState());
 		} else if (see.equals("+") && direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateX());
 		} else if (checkIfNumber(see) == true && direction.equals("right")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftRight();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateG());
 

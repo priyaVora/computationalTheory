@@ -14,10 +14,10 @@ public class State_B implements State {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = 'E';
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateB());
-			
+
 		}
 		String direction = setDirection(see);
 		char write = setWrite(see);
@@ -25,19 +25,19 @@ public class State_B implements State {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.setState(this.machine.getHaltState());
-			System.out.println("Transitioned to Halt State");
+			// System.out.println("Transitioned to Halt State");
 		} else if (see.equals("0") && direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.setState(this.machine.getStateF());
 			this.machine.getTape().shiftLeft();
-			System.out.println("Transitioned to State F");
+			// System.out.println("Transitioned to State F");
 		} else if (checkIfNumber(see) == true && direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.setState(this.machine.getStateC());
 			this.machine.getTape().shiftLeft();
-			System.out.println("Transitioned to State C");
+			// System.out.println("Transitioned to State C");
 		}
 
 	}
@@ -73,7 +73,7 @@ public class State_B implements State {
 	}
 
 	public boolean checkIfNumber(String value) {
-		if(value.equals("+")) { 
+		if (value.equals("+")) {
 			return false;
 		}
 		if (Integer.parseInt(value) > 0 && Integer.parseInt(value) < 10) {

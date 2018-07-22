@@ -30,7 +30,7 @@ public class Driver {
 		System.out.println("\nAnswer: " + calculate(machine, readInput()));
 	}
 
-	private String calculate(TuringMachine machine, String readInput) {
+	public String calculate(TuringMachine machine, String readInput) {
 		String userInputDetected = machine.calculate(readInput);
 		return userInputDetected;
 	}

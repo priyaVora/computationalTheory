@@ -16,14 +16,14 @@ public class Extra2 implements State {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftRight();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getExtra2());
-		} else if(see.equals("E")) {
+		} else if (see.equals("E")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = 'E';
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateC());
 		}

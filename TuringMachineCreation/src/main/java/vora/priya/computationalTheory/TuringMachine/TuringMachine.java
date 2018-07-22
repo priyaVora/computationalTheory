@@ -48,7 +48,6 @@ public class TuringMachine {
 
 	public String calculate(String userInput) {
 		this.setAllStates_Tape(userInput);
-		this.tape.printTape();
 		State currentState = this.getStateStart();
 		this.setState(this.getStateStart());
 		String currentTestValue = userInput;
@@ -56,17 +55,17 @@ public class TuringMachine {
 		char[] val = currentTestValue.toCharArray();
 
 		int sizeOfTestValue = this.tape.getTapeArray().length;
-		System.out.println("\nSize of Tape: " + sizeOfTestValue);
+		// System.out.println("\nSize of Tape: " + sizeOfTestValue);
 		int counter = 0;
 		if (!userInput.equals("")) {
 			char currentSymbol = this.getTape().getTapeArray()[this.tape.getHead()];
-			System.out.println("CHAR: " + currentSymbol);
+			// System.out.println("CHAR: " + currentSymbol);
 			loop: while (currentState != this.haltState) {
 				currentSymbol = this.getTape().getTapeArray()[this.tape.getHead()];
-				System.out.println("\nCurrent Symbol: " + currentSymbol);
-				System.out.println("PREVIOUS STATE:" + this.getState());
+				// System.out.println("\nCurrent Symbol: " + currentSymbol);
+				// System.out.println("PREVIOUS STATE:" + this.getState());
 				this.getState().getNextState("" + this.getTape().getTapeArray()[this.tape.getHead()]);
-				this.tape.printTape();
+				// this.tape.printTape();
 				currentState = this.getState();
 				counter++;
 				if (currentState.equals(this.haltState)) {
@@ -75,7 +74,8 @@ public class TuringMachine {
 				}
 			}
 		}
-		return "=" + userInput;
+		this.tape.getAnswer();
+		return "=" + this.tape.getAnswer();
 	}
 
 	public void setAllStates_Tape(String equation) {

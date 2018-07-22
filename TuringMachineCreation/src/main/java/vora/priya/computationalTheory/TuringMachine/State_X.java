@@ -12,20 +12,18 @@ public class State_X implements State {
 		String direction = setDirection(see);
 		char write = setWrite(see);
 
-	
-		
 		if (direction.equals("left") && see.equals("0")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getExtra());
 		} else if (direction.equals("left") && checkIfNumber(see) == true) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateC());
 		}

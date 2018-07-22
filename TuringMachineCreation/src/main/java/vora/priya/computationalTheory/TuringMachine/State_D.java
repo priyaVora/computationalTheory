@@ -12,35 +12,35 @@ public class State_D implements State {
 		String direction = setDirection(see);
 		char write = setWrite(see);
 
-//		if (see.equals("0")) {
-//			int position = this.machine.getTape().getHead();
-//			this.machine.getTape().getTapeArray()[position] = '1';
-//			this.machine.getTape().shiftLeft();
-//			System.out.println("Head: " + this.machine.getTape().getHead());
-//
-//			this.machine.setState(this.machine.getStateD());
-//
-//		}
+		// if (see.equals("0")) {
+		// int position = this.machine.getTape().getHead();
+		// this.machine.getTape().getTapeArray()[position] = '1';
+		// this.machine.getTape().shiftLeft();
+		// System.out.println("Head: " + this.machine.getTape().getHead());
+		//
+		// this.machine.setState(this.machine.getStateD());
+		//
+		// }
 
 		if (direction.equals("left")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateD());
 		} else if (direction.equals("right") && see.equals("E")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftRight();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateE());
 		} else if (direction.equals("right") && checkIfNumber(see) == true) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = write;
 			this.machine.getTape().shiftRight();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateE());
 		}

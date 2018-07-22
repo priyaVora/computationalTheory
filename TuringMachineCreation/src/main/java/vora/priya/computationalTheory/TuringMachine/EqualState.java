@@ -11,7 +11,7 @@ public class EqualState implements State {
 	public void getNextState(String see) {
 		if (checkIfNumber(see) == true) {
 			this.machine.setState(this.machine.getEndState());
-			System.out.println("Transitioned to End State");
+			//System.out.println("Transitioned to End State");
 		}
 	}
 

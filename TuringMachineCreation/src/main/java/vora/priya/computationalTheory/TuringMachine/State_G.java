@@ -9,18 +9,18 @@ public class State_G implements State {
 	}
 
 	public void getNextState(String see) {
-		if(see.equals("0")) { 
+		if (see.equals("0")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = '9';
 			this.machine.getTape().shiftRight();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getCheck());
-		} else if(see.equals("E")) { 
+		} else if (see.equals("E")) {
 			int position = this.machine.getTape().getHead();
 			this.machine.getTape().getTapeArray()[position] = 'E';
 			this.machine.getTape().shiftLeft();
-			System.out.println("Head: " + this.machine.getTape().getHead());
+			// System.out.println("Head: " + this.machine.getTape().getHead());
 
 			this.machine.setState(this.machine.getStateC());
 		}

@@ -29,6 +29,25 @@ public class Tape {
 
 	}
 
+	public String getAnswer() {
+		int head = 226;
+
+		char current = this.tapeArray[head];
+		String answer = "";
+		int counter = 0;
+		while (current != 'E') {
+			head--;
+			current = this.tapeArray[head];
+			answer += current;
+		}
+		answer = answer.replace("E", "");
+		String updateAnswer = "";
+		for (int i = answer.length() - 1; i >= 0; i--) {
+			updateAnswer += answer.charAt(i);
+		}
+		return updateAnswer;
+	}
+
 	public void tapeOverWrite(String direction, char write) {
 		if (direction.equals("Right")) {
 			shiftRight();
