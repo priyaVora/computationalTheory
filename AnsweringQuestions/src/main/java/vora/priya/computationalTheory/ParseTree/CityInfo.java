@@ -1,6 +1,6 @@
 package vora.priya.computationalTheory.ParseTree;
 
-public class CityInfo {
+public class CityInfo extends Symbol {
 	private DistanceInfo distanceInfo;
 	private DescriptionInfo descriptionInfo;
 	private CityComboInfo cityComboInfo;

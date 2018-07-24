@@ -41,8 +41,9 @@ public class ParseTree {
 			}
 			counter = 0;
 		}
+		checkifCityComboInfo();
 		checkifDistanceInfo();
-
+		checkifCityInfoExist();
 		boolean valid = checkIfStackContainsAValidCityInfo();
 		printStack();
 		return valid;
@@ -86,6 +87,44 @@ public class ParseTree {
 
 	}
 
+	private void checkifCityInfoExist() {
+		CityComboInfo cityComboInfo = new CityComboInfo();
+		DescriptionInfo descriptionInfo = new DescriptionInfo();
+		DistanceInfo distanceInfo = new DistanceInfo();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("City Combo Info")) {
+				cityComboInfo = (CityComboInfo) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Description Info")) {
+						descriptionInfo = (DescriptionInfo) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Distance Info")) {
+								distanceInfo = (DistanceInfo) stack.pop();
+								CityInfo cityInfo = new CityInfo();
+								cityInfo.setCityComboInfo(cityComboInfo);
+								cityInfo.setDescriptionInfo(descriptionInfo);
+								cityInfo.setDistanceInfo(distanceInfo);
+								cityInfo.setSymbol("City Info");
+								stack.push(cityInfo);
+							}
+						} else {
+							stack.push(descriptionInfo);
+							stack.push(cityComboInfo);
+
+						}
+					} else {
+						stack.push(cityComboInfo);
+					}
+				} else {
+					stack.push(cityComboInfo);
+				}
+
+			}
+		}
+
+	}
+
 	private void checkifCityComboInfo() {
 		CityName city2 = new CityName();
 		Conjunction conjunction = new Conjunction();
@@ -113,7 +152,7 @@ public class ParseTree {
 							stack.push(city2);
 
 						}
-					} else { 
+					} else {
 						stack.push(city2);
 					}
 				} else {
@@ -155,7 +194,7 @@ public class ParseTree {
 				}
 			}
 		}
-		checkifCityComboInfo();
+		
 
 	}
 
