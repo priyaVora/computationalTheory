@@ -82,7 +82,104 @@ public class ParseTree {
 
 			}
 		}
+		checkIfDescriptionInfoExist();
 
+	}
+
+	private void checkifCityComboInfo() {
+		CityName city2 = new CityName();
+		Conjunction conjunction = new Conjunction();
+		CityName city1 = new CityName();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("City")) {
+				city2 = (CityName) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Conjunction")) {
+						conjunction = (Conjunction) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("City")) {
+								city1 = (CityName) stack.pop();
+
+								CityComboInfo cityCombo = new CityComboInfo();
+								cityCombo.setCityOne(city1);
+								cityCombo.setConjunction(conjunction);
+								cityCombo.setCityTwo(city2);
+								cityCombo.setSymbol("City Combo Info");
+								stack.push(cityCombo);
+							}
+						} else {
+							stack.push(conjunction);
+							stack.push(city2);
+
+						}
+					} else { 
+						stack.push(city2);
+					}
+				} else {
+					stack.push(city2);
+				}
+
+			}
+		}
+
+	}
+
+	public void combineCityNames() {
+		CityName cityOne = new CityName();
+		CityName cityTwo = new CityName();
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("City")) {
+				cityOne = (CityName) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("City")) {
+						cityTwo = (CityName) stack.pop();
+						CityName cityName = new CityName();
+
+						String cityNameCombination = cityTwo.getCityName_Value() + " " + cityOne.getCityName_Value();
+						System.out.println("NEW CITY NAME : " + cityNameCombination);
+						cityName.setSymbol("City");
+						cityName.setCityName_Value(cityNameCombination);
+						stack.push(cityName);
+
+						// DescriptionInfo descriptionInfo = new DescriptionInfo();
+						// descriptionInfo.setNoun(noun);
+						// descriptionInfo.setVerb(verb);
+						// descriptionInfo.setSymbol("Description Info");
+						// stack.push(descriptionInfo);
+					} else {
+						stack.push(cityOne);
+					}
+				} else {
+					stack.push(cityOne);
+				}
+			}
+		}
+		checkifCityComboInfo();
+
+	}
+
+	public void checkIfDescriptionInfoExist() {
+		Verb verb = new Verb();
+		Noun noun = new Noun();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Verb")) {
+				verb = (Verb) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Noun")) {
+						noun = (Noun) stack.pop();
+						DescriptionInfo descriptionInfo = new DescriptionInfo();
+						descriptionInfo.setNoun(noun);
+						descriptionInfo.setVerb(verb);
+						descriptionInfo.setSymbol("Description Info");
+						stack.push(descriptionInfo);
+					}
+				} else {
+					stack.push(noun);
+				}
+			}
+		}
 	}
 
 	private boolean checkIfStackContainsAValidCityInfo() {
@@ -139,6 +236,7 @@ public class ParseTree {
 			cityName.setCityName_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(cityName);
+			combineCityNames();
 			return true;
 		}
 	}

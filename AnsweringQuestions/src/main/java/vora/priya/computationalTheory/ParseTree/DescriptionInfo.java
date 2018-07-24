@@ -1,6 +1,6 @@
 package vora.priya.computationalTheory.ParseTree;
 
-public class DescriptionInfo {
+public class DescriptionInfo extends Symbol {
 	private Noun noun;
 	private Verb verb;
 
