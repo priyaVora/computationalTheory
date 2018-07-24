@@ -128,8 +128,7 @@ public class ParseTree {
 	private void checkIfSentence() {
 		Verb_Phrase vp = new Verb_Phrase();
 		Noun_Phrase np = new Noun_Phrase();
-		
-		
+
 		if (!(stack.isEmpty())) {
 			if (stack.peek().getSymbol().equals("VP")) {
 				vp = (Verb_Phrase) stack.pop();
@@ -140,7 +139,7 @@ public class ParseTree {
 					sentence.setNoun_Phrase(np);
 					sentence.setVerb_Phrase(vp);
 					stack.push(sentence);
-				} else { 
+				} else {
 					stack.push(vp);
 				}
 			}
@@ -164,7 +163,7 @@ public class ParseTree {
 						stack.push(verb_phrase);
 					}
 				} else {
-					
+
 					stack.push(np);
 				}
 			}
@@ -173,9 +172,6 @@ public class ParseTree {
 	}
 
 	public boolean checkIfStackCanBeReduced(Symbol symbol) {
-		Sentence sentence = new Sentence();
-		Noun_Phrase noun_phrase = new Noun_Phrase();
-		Verb_Phrase verb_phrase = new Verb_Phrase();
 
 		if (checkifStackCanReduceTo_Determinant() == true) {
 			Determiner det = new Determiner();
