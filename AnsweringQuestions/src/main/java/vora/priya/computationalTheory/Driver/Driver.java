@@ -30,7 +30,7 @@ public class Driver {
 					System.out.println(" ");
 
 					boolean valid_response = parseTree.isCityInfo(userInput);
-					// System.out.println("VALID: " + valid_response);
+					System.out.println("VALID: " + valid_response);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

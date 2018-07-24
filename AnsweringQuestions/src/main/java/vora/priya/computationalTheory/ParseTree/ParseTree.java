@@ -6,6 +6,7 @@ import java.util.Stack;
 import vora.priya.computationalTheory.Tokenizer.Tokenizer;
 
 public class ParseTree {
+	private CityInfo sentenceRecognized;
 	private Tokenizer tokenizer;
 
 	Stack<Symbol> stack = new Stack<Symbol>();
@@ -194,7 +195,6 @@ public class ParseTree {
 				}
 			}
 		}
-		
 
 	}
 
@@ -222,6 +222,18 @@ public class ParseTree {
 	}
 
 	private boolean checkIfStackContainsAValidCityInfo() {
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("City Info")) {
+				if (stack.size() == 1) {
+					sentenceRecognized = (CityInfo) stack.peek();
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
 		return false;
 	}
 
