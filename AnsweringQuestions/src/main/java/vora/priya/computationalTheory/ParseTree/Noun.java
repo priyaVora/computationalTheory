@@ -11,7 +11,7 @@ public class Noun extends Symbol {
 
 	public Noun() {
 		listOfNouns = new ArrayList<String>();
-		String nouns = "road";
+		String nouns = "road route cities cities?";
 		String[] eachNoun = nouns.split(" ");
 
 		listofValidNouns = eachNoun;

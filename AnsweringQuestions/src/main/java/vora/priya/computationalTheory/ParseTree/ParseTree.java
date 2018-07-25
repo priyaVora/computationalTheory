@@ -7,6 +7,8 @@ import vora.priya.computationalTheory.Tokenizer.Tokenizer;
 
 public class ParseTree {
 	private CityInfo sentenceRecognized;
+	private CityQuestion sentenceQuestion;
+
 	private Tokenizer tokenizer;
 
 	Stack<Symbol> stack = new Stack<Symbol>();
@@ -45,9 +47,18 @@ public class ParseTree {
 		checkifCityComboInfo();
 		checkifDistanceInfo();
 		checkifCityInfoExist();
-		boolean valid = checkIfStackContainsAValidCityInfo();
+		checkifCityQuestionExist();
+		boolean validInfo = checkIfStackContainsAValidCityInfo();
+		boolean validQuestion = checkIfStackContainsAValidCityQuestion();
+		if (validInfo == true) {
+			sentenceQuestion = null;
+		} else if (validQuestion == true) {
+			sentenceRecognized = null;
+		} else {
+			return false;
+		}
 		printStack();
-		return valid;
+		return validInfo;
 	}
 
 	private void checkifDistanceInfo() {
@@ -126,6 +137,45 @@ public class ParseTree {
 
 	}
 
+	private void checkifCityQuestionExist() {
+		QuestionPartTwo partTwo = new QuestionPartTwo();
+		Nominative_Case nominativeCase = new Nominative_Case();
+		QuestionPartOne partOne = new QuestionPartOne();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Part Two")) {
+				partTwo = (QuestionPartTwo) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Nominative Case")) {
+						nominativeCase = (Nominative_Case) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Part One")) {
+								partOne = (QuestionPartOne) stack.pop();
+
+								CityQuestion question = new CityQuestion();
+								question.setSymbol("City Question");
+								question.setNominative(nominativeCase);
+								question.setQuestionOne(partOne);
+								question.setQuestionTwo(partTwo);
+								stack.push(question);
+							}
+						} else {
+							stack.push(nominativeCase);
+							stack.push(partTwo);
+
+						}
+					} else {
+						stack.push(nominativeCase);
+					}
+				} else {
+					stack.push(partTwo);
+				}
+
+			}
+		}
+
+	}
+
 	private void checkifCityComboInfo() {
 		CityName city2 = new CityName();
 		Conjunction conjunction = new Conjunction();
@@ -163,6 +213,82 @@ public class ParseTree {
 			}
 		}
 
+	}
+
+	public void checkIfQuestionPartOneExist() {
+		Determiner determiner2 = new Determiner();
+		Verb verb = new Verb();
+		Determiner determiner1 = new Determiner();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Determiner")) {
+				determiner2 = (Determiner) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Verb")) {
+						verb = (Verb) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Determiner")) {
+								determiner1 = (Determiner) stack.pop();
+
+								QuestionPartOne partOne = new QuestionPartOne();
+								partOne.setDeterminer2(determiner2);
+								partOne.setDeterminer(determiner1);
+								partOne.setVerb(verb);
+								partOne.setSymbol("Part One");
+								stack.push(partOne);
+							}
+						} else {
+							stack.push(verb);
+							stack.push(determiner2);
+
+						}
+					} else {
+						stack.push(determiner2);
+					}
+				} else {
+					stack.push(determiner2);
+				}
+
+			}
+		}
+	}
+
+	public void checkIfQuestionPartTwoExist() {
+		Noun noun = new Noun();
+		Determiner determiner = new Determiner();
+		Preposition preposition = new Preposition();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Noun")) {
+				noun = (Noun) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Determiner")) {
+						determiner = (Determiner) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Preposition")) {
+								preposition = (Preposition) stack.pop();
+
+								QuestionPartTwo partTwo = new QuestionPartTwo();
+								partTwo.setDeterminer(determiner);
+								partTwo.setNoun(noun);
+								partTwo.setPreposition(preposition);
+								partTwo.setSymbol("Part Two");
+								stack.push(partTwo);
+							}
+						} else {
+							stack.push(determiner);
+							stack.push(noun);
+
+						}
+					} else {
+						stack.push(noun);
+					}
+				} else {
+					stack.push(noun);
+				}
+
+			}
+		}
 	}
 
 	public void combineCityNames() {
@@ -213,9 +339,11 @@ public class ParseTree {
 						descriptionInfo.setVerb(verb);
 						descriptionInfo.setSymbol("Description Info");
 						stack.push(descriptionInfo);
+					} else {
+						stack.push(verb);
 					}
 				} else {
-					stack.push(noun);
+					stack.push(verb);
 				}
 			}
 		}
@@ -237,6 +365,48 @@ public class ParseTree {
 		return false;
 	}
 
+	private boolean checkIfStackContainsAValidCityQuestion() {
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("City Question")) {
+				if (stack.size() == 1) {
+					sentenceQuestion = (CityQuestion) stack.peek();
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	public void checkifNomExist() {
+		Noun noun = new Noun();
+		Adjective adjective = new Adjective();
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Noun")) {
+				noun = (Noun) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Adjective")) {
+						adjective = (Adjective) stack.pop();
+						Nominative_Case nom = new Nominative_Case();
+						nom.setAdjective(adjective);
+						nom.setNoun(noun);
+						nom.setSymbol("Nominative Case");
+						stack.push(nom);
+					} else {
+						stack.push(noun);
+					}
+				} else {
+
+					// noun.setSymbol("Noun");
+					stack.push(noun);
+				}
+			}
+		}
+	}
+
 	private boolean checkIfStackCanBeReduced(Symbol symbol) {
 		if (checkIfStackReduceTo_Determiner() == true) {
 			Determiner det = new Determiner();
@@ -244,6 +414,7 @@ public class ParseTree {
 			det.setDeterminer_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(det);
+			checkIfQuestionPartOneExist();
 			return true;
 		} else if (checkIfStackReduceTo_Number() == true) {
 			DistanceNumber number = new DistanceNumber();
@@ -265,6 +436,15 @@ public class ParseTree {
 			noun.setNoun_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(noun);
+			checkifNomExist();
+			checkIfQuestionPartTwoExist();
+			return true;
+		} else if (checkIfStackReduceTo_Noun() == true) {
+			Noun noun = new Noun();
+			noun.setSymbol("Noun");
+			noun.setNoun_Value(symbol.getSymbol());
+			stack.pop();
+			stack.push(noun);
 			return true;
 		} else if (checkIfStackReduceTo_Conjunction() == true) {
 			Conjunction conjunction = new Conjunction();
@@ -272,6 +452,15 @@ public class ParseTree {
 			conjunction.setConjunction_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(conjunction);
+			return true;
+		}
+
+		else if (checkIfStackReduceTo_Preposition() == true) {
+			Preposition preposition = new Preposition();
+			preposition.setSymbol("Preposition");
+			preposition.setPrep_Value(symbol.getSymbol());
+			stack.pop();
+			stack.push(preposition);
 			return true;
 		} else if (checkIfStackReduceTo_Verb() == true) {
 			Verb verb = new Verb();
@@ -281,7 +470,16 @@ public class ParseTree {
 			stack.push(verb);
 
 			return true;
-		} else {
+		} else if (checkifStackCanReduceTo_Adjective() == true) {
+			Adjective adjective = new Adjective();
+			adjective.setSymbol("Adjective");
+			adjective.setAdjectiveValue(symbol.getSymbol());
+			stack.pop();
+			stack.push(adjective);
+			return true;
+		}
+
+		else {
 			CityName cityName = new CityName();
 			cityName.setSymbol("City");
 			cityName.setCityName_Value(symbol.getSymbol());
@@ -290,6 +488,16 @@ public class ParseTree {
 			combineCityNames();
 			return true;
 		}
+	}
+
+	private boolean checkIfStackReduceTo_Preposition() {
+		Preposition prep = new Preposition();
+		return prep.isPrep(stack.peek().getSymbol());
+	}
+
+	public boolean checkifStackCanReduceTo_Adjective() {
+		Adjective adjective = new Adjective();
+		return adjective.isAdjective(stack.peek().getSymbol());
 	}
 
 	public boolean checkIfStackReduceTo_Conjunction() {
