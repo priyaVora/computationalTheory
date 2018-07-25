@@ -23,14 +23,15 @@ public class Driver {
 				if (userInput.equals("0")) {
 					break loop;
 				} else {
-					// parseTree.getTokenizer().tokenize(userInput);
-					for (int i = 0; i < parseTree.getTokenizer().getTokenizerList().size(); i++) {
-						System.out.println(": " + parseTree.getTokenizer().getTokenizerList().get(i));
-					}
-					System.out.println(" ");
-
 					boolean valid_response = parseTree.isCityInfo(userInput);
 					System.out.println("VALID: " + valid_response);
+					String inputType = driver.reconginzeInputType(parseTree);
+					if (inputType.equals("Info")) {
+						//add to the network
+					} else if (inputType.equals("Question")) {
+						//get the shortest path
+					}
+					parseTree.printStack();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -44,6 +45,17 @@ public class Driver {
 
 		String readline = reader.readLine();
 		return readline;
+	}
+
+	public String reconginzeInputType(ParseTree parseTree) {
+
+		if (parseTree.getSentenceQuestion() != null && parseTree.getSentenceRecognized() == null) {
+			return "Question";
+		} else if (parseTree.getSentenceRecognized() != null && parseTree.getSentenceQuestion() == null) {
+			return "Info";
+		} else {
+			return null;
+		}
 	}
 
 }

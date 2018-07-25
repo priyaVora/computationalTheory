@@ -57,7 +57,7 @@ public class ParseTree {
 		} else {
 			return false;
 		}
-		printStack();
+		// printStack();
 		return validInfo;
 	}
 
@@ -560,6 +560,22 @@ public class ParseTree {
 
 	public void setStack(Stack<Symbol> stack) {
 		this.stack = stack;
+	}
+
+	public CityInfo getSentenceRecognized() {
+		return sentenceRecognized;
+	}
+
+	public void setSentenceRecognized(CityInfo sentenceRecognized) {
+		this.sentenceRecognized = sentenceRecognized;
+	}
+
+	public CityQuestion getSentenceQuestion() {
+		return sentenceQuestion;
+	}
+
+	public void setSentenceQuestion(CityQuestion sentenceQuestion) {
+		this.sentenceQuestion = sentenceQuestion;
 	}
 
 }
