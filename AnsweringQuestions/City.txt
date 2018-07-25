@@ -1,0 +1,6 @@
+Rome,Paris,San Francisco,London,Salt Lake City,AX10,AX11,AX12,AX99,AX100
+Rome,London:3,Paris:3,San Francisco:6
+Paris,Rome:3,San Francisco:3,London:6
+San Francisco,Paris:3,Rome:6,London:4
+London,Rome:3,Paris:6,San Francisco:4,Salt Lake City:15
+Salt Lake City,London:15

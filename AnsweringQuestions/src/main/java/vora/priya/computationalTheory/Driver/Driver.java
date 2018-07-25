@@ -27,9 +27,11 @@ public class Driver {
 					System.out.println("VALID: " + valid_response);
 					String inputType = driver.reconginzeInputType(parseTree);
 					if (inputType.equals("Info")) {
-						//add to the network
+						// add to the network
+						System.out.println("Type: Info");
 					} else if (inputType.equals("Question")) {
-						//get the shortest path
+						// get the shortest path
+						System.out.println("Type: Question");
 					}
 					parseTree.printStack();
 				}
