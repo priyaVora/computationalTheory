@@ -175,7 +175,7 @@ public class Prims<T> {
 	public List<String> findCityNames() {
 		individualVertices = new HashSet<T>();
 		List<String> listOfCities = new ArrayList<String>();
-		
+
 		for (List<EdgePrims<T>> eachMST : mstCollection) {
 			for (EdgePrims<T> eachEdge : eachMST) {
 				if (!individualVertices.contains(eachEdge.getSource())) {
@@ -219,6 +219,9 @@ public class Prims<T> {
 			// System.out.println("\nShortest Path Operation Below: ");
 
 			String[] citiesWanted = userInput.trim().split(" ");
+			for (String string : citiesWanted) {
+				System.out.println("CIT: " + string);
+			}
 			Map<String, Integer> allPathsToDistanceMap = this.getGraphPrims().getGlobalAllPathToDistance();
 
 			for (Entry<String, Integer> entry : allPathsToDistanceMap.entrySet()) {
@@ -244,30 +247,42 @@ public class Prims<T> {
 
 				if (valid == true) {
 
-					//System.out.println("Accepted Route: " + path);
-					// System.out.println("DISTANCE: " + distance);
+					System.out.println("Accepted Route: " + path);
+					System.out.println("DISTANCE: " + distance);
 
 					routeMap.put(path, distance);
-					//System.out.println("Calculating the Shortest Route");
-					findShortestRouteWithDistanc2e(routeMap);
+					// System.out.println("Calculating the Shortest Route");
+					findShortestRouteWithDistanc2e(routeMap, citiesWanted);
 				}
 			}
 
 		}
-		//System.out.println("\nShortest Path: " + shortestPath);
-		//System.out.println("Total Distance " + shortestPathDistance + "KM");
+		// System.out.println("\nShortest Path: " + shortestPath);
+		// System.out.println("Total Distance " + shortestPathDistance + "KM");
 	}
 
-	public void findShortestRouteWithDistanc2e(Map<String, Integer> routeMap) {
+	public void findShortestRouteWithDistanc2e(Map<String, Integer> routeMap, String[] citiesWanted) {
+		shortestPath = null;
 		for (Entry<String, Integer> t : routeMap.entrySet()) {
 			String path = t.getKey();
 			Integer distance = t.getValue();
 
-			if (shortestPath == null) {
+			boolean valid = false;
+			loop: for (String cityWanted : citiesWanted) {
+				if(path.contains(cityWanted)) { 
+					valid = true;
+				} else { 
+					valid = false;
+					break loop;
+				}
+			}
+			
+			
+			if (shortestPath == null && valid == true) {
 				shortestPath = path;
 				shortestPathDistance = distance;
 
-			} else if (shortestPathDistance > distance) {
+			} else if (shortestPathDistance > distance && valid == true) {
 				shortestPath = path;
 				shortestPathDistance = distance;
 			}
