@@ -110,14 +110,6 @@ public class Prims<T> {
 		return listMinEdges;
 	}
 
-	// public void getShortestPath(T sourceVertex, T targetVertex) {
-	//
-	// }
-	//
-	// public void getHub() {
-	//
-	// }
-
 	private void getData() throws IOException {
 		int lineCount = 0;
 		String pathToFile = "City.txt";
@@ -232,7 +224,7 @@ public class Prims<T> {
 		prims.start();
 		
 		System.out.println("///////////////////////////////////////////////////////");
-		prims.getGraphPrims().findPaths(prims.getGraphPrims(), "London", "Shanghai");
+		prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), "London", "Shanghai");
 		System.out.println("///////////////////////////////////////////////////////");
 		
 	}

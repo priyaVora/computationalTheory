@@ -68,31 +68,45 @@ public class GraphPrims<T> implements Iterable<T> {
 	Stack<String> currentPath = new Stack<String>();
 	List<String> visitedList = new ArrayList<String>();
 
-	
-	
-	
-	
-	public void findPaths(GraphPrims graphs, String currentVertex, String destinationVertex) {
+	public List<String> findAllPaths(GraphPrims graphs, String currentVertex, String destinationVertex) {
+		String foundPath = "";
+		List<String> listOfAllPaths = new ArrayList<String>();
+		findPaths(graphs, currentVertex, destinationVertex, foundPath, listOfAllPaths);
+
+		for (String string : listOfAllPaths) {
+			System.out.println("Found Path: " + string);
+		}
+		return listOfAllPaths;
+	}
+
+	public List<String> findPaths(GraphPrims graphs, String currentVertex, String destinationVertex, String foundPath,
+			List<String> listOfAllPaths) {
 		currentPath.push(currentVertex);
 		visitedList.add(currentVertex);
-		
+
 		if (currentVertex.equals(destinationVertex)) {
 			visitedList.remove(currentVertex);
 		}
 
 		if (currentVertex.equals(destinationVertex) && currentPath.size() != 1) {
-		
-			System.out.println("  CURRENT: " + currentVertex);
-		
+
+			// System.out.println(" CURRENT: " + currentVertex);
+			foundPath += currentVertex;
+			// System.out.println("Found Path " + foundPath);
+			listOfAllPaths.add(foundPath);
+			foundPath = "";
+
 		} else {
 			for (String adjNode : getAdjacentNodes(currentVertex)) {
 				if (!(visitedList.contains(adjNode))) {
 
-					System.out.println("\n----------Current: " + currentVertex + "-------");
-					findPaths(graphs, adjNode, destinationVertex);
+					// System.out.println("\n----------Current: " + currentVertex + "-------");
+					foundPath += currentVertex + "----->";
+					findPaths(graphs, adjNode, destinationVertex, foundPath, listOfAllPaths);
 				}
 			}
 		}
+		return listOfAllPaths;
 	}
 
 	public ArrayList<String> getAdjacentNodes(String node) {
@@ -100,19 +114,17 @@ public class GraphPrims<T> implements Iterable<T> {
 		Set<String> keys = (Set<String>) graph.keySet();
 		for (String key : keys) {
 			if (key.equals(node)) {
-				
-				
-				
+
 				Map<T, Integer> mapOfConnections = graph.get(key);
-				
+
 				int counter = 0;
 				for (Entry<T, Integer> entry : mapOfConnections.entrySet()) {
-				    String keyOfCity = (String) entry.getKey();
-				    Integer value = entry.getValue();
-				    neighboursList.add(counter, keyOfCity);
+					String keyOfCity = (String) entry.getKey();
+					Integer value = entry.getValue();
+					neighboursList.add(counter, keyOfCity);
 				}
-				
-				//neighboursList = (ArrayList<String>) graph.get(key);
+
+				// neighboursList = (ArrayList<String>) graph.get(key);
 				return new ArrayList<String>(neighboursList);
 			}
 		}
