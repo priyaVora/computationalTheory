@@ -1,11 +1,14 @@
 package vora.priya.computationalTheory.TourOptimizer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Stack;
 
 public class GraphPrims<T> implements Iterable<T> {
 
@@ -45,7 +48,7 @@ public class GraphPrims<T> implements Iterable<T> {
 		if (vertex1 == null || vertex2 == null) {
 			throw new NullPointerException();
 		} else if (!graph.containsKey(vertex1) || !graph.containsKey(vertex2)) {
-			
+
 		} else {
 
 			graph.get(vertex1).remove(vertex2);
@@ -62,20 +65,62 @@ public class GraphPrims<T> implements Iterable<T> {
 		return false;
 	}
 
+	Stack<String> currentPath = new Stack<String>();
+	List<String> visitedList = new ArrayList<String>();
+
+	
+	
+	
+	
+	public void findPaths(GraphPrims graphs, String currentVertex, String destinationVertex) {
+		currentPath.push(currentVertex);
+		visitedList.add(currentVertex);
+		
+		if (currentVertex.equals(destinationVertex)) {
+			visitedList.remove(currentVertex);
+		}
+
+		if (currentVertex.equals(destinationVertex) && currentPath.size() != 1) {
+		
+			System.out.println("  CURRENT: " + currentVertex);
+		
+		} else {
+			for (String adjNode : getAdjacentNodes(currentVertex)) {
+				if (!(visitedList.contains(adjNode))) {
+
+					System.out.println("\n----------Current: " + currentVertex + "-------");
+					findPaths(graphs, adjNode, destinationVertex);
+				}
+			}
+		}
+	}
+
 	public ArrayList<String> getAdjacentNodes(String node) {
-		ArrayList<String> neighboursList;
+		ArrayList<String> neighboursList = new ArrayList<String>();
 		Set<String> keys = (Set<String>) graph.keySet();
 		for (String key : keys) {
 			if (key.equals(node)) {
-				neighboursList = (ArrayList<String>) graph.get(key);
+				
+				
+				
+				Map<T, Integer> mapOfConnections = graph.get(key);
+				
+				int counter = 0;
+				for (Entry<T, Integer> entry : mapOfConnections.entrySet()) {
+				    String keyOfCity = (String) entry.getKey();
+				    Integer value = entry.getValue();
+				    neighboursList.add(counter, keyOfCity);
+				}
+				
+				//neighboursList = (ArrayList<String>) graph.get(key);
 				return new ArrayList<String>(neighboursList);
 			}
 		}
 		return new ArrayList<String>();
 	}
 
-//	public List<Vertex<T>> getAllVertex() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// public List<Vertex<T>> getAllVertex() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 }

@@ -1,4 +1,5 @@
 package vora.priya.computationalTheory.TourOptimizer;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,7 +27,8 @@ public class Prims<T> {
 	Map<Integer, Integer> cableMap = new HashMap<Integer, Integer>();
 	public Integer totalCableLength = 0;
 
-	public static Comparator<EdgePrims> edgePrioritySetter = new Comparator<EdgePrims>() { //online solution to set priority 
+	public static Comparator<EdgePrims> edgePrioritySetter = new Comparator<EdgePrims>() { // online solution to set
+																							// priority
 		public int compare(EdgePrims edge1, EdgePrims edge2) {
 			return edge1.getDistance() - edge2.getDistance();
 		}
@@ -108,13 +110,13 @@ public class Prims<T> {
 		return listMinEdges;
 	}
 
-	public void getShortestPath(T sourceVertex, T targetVertex) {
-		
-	}
-	
-	public void getHub() { 
-		
-	}
+	// public void getShortestPath(T sourceVertex, T targetVertex) {
+	//
+	// }
+	//
+	// public void getHub() {
+	//
+	// }
 
 	private void getData() throws IOException {
 		int lineCount = 0;
@@ -135,12 +137,14 @@ public class Prims<T> {
 						T v2 = (T) splitWeight[0];
 
 						graphPrims.addEdge(startV, v2, Integer.parseInt(splitWeight[1]));
+						
 					}
 				}
 				lineCount++;
 			}
 		}
 		this.runMinSpanTree(graphPrims);
+
 		br.close();
 	}
 
@@ -226,22 +230,11 @@ public class Prims<T> {
 		GraphPrims<Character> graphPrims = new GraphPrims<Character>();
 		Prims<Character> prims = new Prims<Character>();
 		prims.start();
-
-		// prims.isItALeafNode(graphPrims);
-		// System.out.println(" ");
-		// graphPrims.addEgde('A', 'D', 1);
-		// graphPrims.addEgde('D', 'E', 6);
-		// graphPrims.addEgde('E', 'F', 2);
-		// graphPrims.addEgde('F', 'C', 4);
-		// graphPrims.addEgde('C', 'B', 1);
-		// graphPrims.addEgde('A', 'B', 3);
-		// graphPrims.addEgde('C', 'E', 5);
-		// graphPrims.addEgde('B', 'D', 3);
-		// graphPrims.addEgde('C', 'D', 1);
-		//
-		// for (EdgePrims<Character> edge : getMinSpanTree(graphPrims)) {
-		// System.out.println(edge.toString());
-		// }
+		
+		System.out.println("///////////////////////////////////////////////////////");
+		prims.getGraphPrims().findPaths(prims.getGraphPrims(), "London", "Shanghai");
+		System.out.println("///////////////////////////////////////////////////////");
+		
 	}
 
 	void start() throws IOException {

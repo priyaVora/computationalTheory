@@ -37,7 +37,7 @@ public class ParseTree {
 			Symbol symbol = new Symbol();
 			symbol.setSymbol(eachToken);
 			stack.add(symbol);
-			if (checkIfStackCanBeReduced(symbol) == true) {
+			if (checkIfStackCanBeReduced(symbol)){
 				checkifNomExist();
 			}
 			counter = 0;
