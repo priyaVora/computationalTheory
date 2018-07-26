@@ -28,33 +28,48 @@ public class Driver {
 				if (userInput.equals("0")) {
 					break loop;
 				} else {
-					boolean valid_response = parseTree.isCityInfo(userInput);
-					// System.out.println("VALID: " + valid_response);
-					String inputType = driver.reconginzeInputType(parseTree);
-					if (inputType.equals("Info")) {
-						// add to the network
-						// System.out.println("Type: Info");
-						System.out.println("> Ok.");
-						addToGraph(
-								parseTree.getSentenceRecognized().getCityComboInfo().getCityOne().getCityName_Value(),
-								parseTree.getSentenceRecognized().getCityComboInfo().getCityTwo().getCityName_Value(),
-								Integer.parseInt(parseTree.getSentenceRecognized().getDistanceInfo().getDistanceNumber()
-										.getDistanceValue()));
-						if (prims.getGraphPrims() == null) {
-							System.out.println("Graph is still null");
-						}
-					} else if (inputType.equals("Question")) {
-						// get the shortest path
-						System.out.println("Type: Question");
-					} else if (inputType.equals("Request")) {
-						System.out.println("Type: Request");
-						String requestInput = userInput.trim();
-						requestInput = parseBuildRequest(requestInput);
-						getShortestPath(requestInput);
-					} else {
+					if(parseTree != null) { 
+						boolean valid_response = parseTree.isCityInfo(userInput);
+						// System.out.println("VALID: " + valid_response);
+						String inputType = driver.reconginzeInputType(parseTree);
+						
+						if(inputType != null) { 
+							if (inputType.equals("Info")) {
+								// add to the network
+								// System.out.println("Type: Info");
+								System.out.println("> Ok.");
+								addToGraph(
+										parseTree.getSentenceRecognized().getCityComboInfo().getCityOne().getCityName_Value(),
+										parseTree.getSentenceRecognized().getCityComboInfo().getCityTwo().getCityName_Value(),
+										Integer.parseInt(parseTree.getSentenceRecognized().getDistanceInfo().getDistanceNumber()
+												.getDistanceValue()));
+								if (prims.getGraphPrims() == null) {
+									// System.out.println("Graph is still null");
+								}
+							} else if (inputType.equals("Question")) {
+								// get the shortest path
+								// System.out.println("Type: Question");
+							} else if (inputType.equals("Request")) {
+								// System.out.println("Type: Request");
+								String requestInput = userInput.trim();
+								requestInput = parseBuildRequest(requestInput);
+								if(requestInput != null) { 									
+									getShortestPath(requestInput);
+								} else { 
+									System.out.println(">Sorry, I don't udnerstand");
+								}
+							} else {
 
+							}
+						} else { 
+							System.out.println(">Sorry did not understand what you said.");
+						}
+					} else { 
+						System.out.println(">Wait what?");
 					}
-					parseTree.printStack();
+					
+				
+					// parseTree.printStack();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -74,12 +89,30 @@ public class Driver {
 		prims.operateFindPaths(tempCities);
 		String path = prims.getShortestPath();
 		Integer distance = prims.getShortestPathDistance();
-		//System.out.println("Shorest Path: " + path);
-		//System.out.println("Shortest Distance: " + distance);
+		System.out.println(" >Shortest Path: " + path);
+		System.out.println(" >Total Distance: " + distance);
+		getPathForEach(path);
+	}
+
+	public static void getPathForEach(String path) {
+		path = path.trim();
+		String[] diffCities = path.split(" ");
+		int counter = 0;
+		int size = diffCities.length;
+		System.out.println(" ");
+		while (counter != size - 1) {
+			String currentCity = diffCities[counter];
+			String nextCity = diffCities[counter + 1];
+
+			System.out.print(currentCity + " ");
+			System.out.print(nextCity + " ");
+			prims.getGraphPrims().getSpecficAdjacentNodes(currentCity, nextCity);
+			counter++;
+		}
 	}
 
 	public static String parseBuildRequest(String requestInput) {
-		System.out.println("Original: " + requestInput);
+		// System.out.println("Original: " + requestInput);
 		requestInput = requestInput.replace("Build", "");
 		requestInput = requestInput.replace("a ", "");
 		requestInput = requestInput.replace("tour", "");
@@ -87,16 +120,17 @@ public class Driver {
 		requestInput = requestInput.replace("and", "");
 		requestInput = requestInput.trim();
 		requestInput = requestInput.replace("  ", " ");
-		System.out.println("Original Modified: " + requestInput);
+		// System.out.println("Original Modified: " + requestInput);
+		System.out.println("The shortest tour connecting " + requestInput + " is: ");
 		String[] cityList = requestInput.split(",");
-		
+
 		int counter = 0;
 		String cityWanted = "";
 		for (String string : cityList) {
-			System.out.println(string.trim());
+			// System.out.println(string.trim());
 			cityWanted += string.trim() + " ";
 		}
-		System.out.println(cityWanted);
+
 		return cityWanted;
 	}
 

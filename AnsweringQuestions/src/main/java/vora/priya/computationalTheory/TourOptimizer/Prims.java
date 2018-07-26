@@ -244,18 +244,18 @@ public class Prims<T> {
 
 				if (valid == true) {
 
-					System.out.println("Accepted Route: " + path);
-					 System.out.println("DISTANCE: " + distance);
+					//System.out.println("Accepted Route: " + path);
+					// System.out.println("DISTANCE: " + distance);
 
 					routeMap.put(path, distance);
-					System.out.println("Calculating the Shortest Route");
+					//System.out.println("Calculating the Shortest Route");
 					findShortestRouteWithDistanc2e(routeMap);
 				}
 			}
 
 		}
-		System.out.println("\nShortest Path: " + shortestPath);
-		System.out.println("Shortest Distance " + shortestPathDistance);
+		//System.out.println("\nShortest Path: " + shortestPath);
+		//System.out.println("Total Distance " + shortestPathDistance + "KM");
 	}
 
 	public void findShortestRouteWithDistanc2e(Map<String, Integer> routeMap) {

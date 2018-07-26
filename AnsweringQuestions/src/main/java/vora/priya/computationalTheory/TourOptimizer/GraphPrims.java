@@ -97,7 +97,7 @@ public class GraphPrims<T> implements Iterable<T> {
 			totalDistance += distanceValue;
 			counter++;
 		}
-		//System.out.println("Total Distance: " + totalDistance);
+		// System.out.println("Total Distance: " + totalDistance);
 		return totalDistance;
 	}
 
@@ -113,7 +113,7 @@ public class GraphPrims<T> implements Iterable<T> {
 		findPaths(graphs, currentVertex.trim(), destinationVertex.trim(), foundPath, listOfAllPaths);
 
 		for (String string : listOfAllPaths) {
-			//System.out.println("\nFound Path: " + string);
+			// System.out.println("\nFound Path: " + string);
 			Integer distance = findFullPathValue(string);
 
 			globalAllPathToDistance.put(string, distance);
@@ -173,6 +173,32 @@ public class GraphPrims<T> implements Iterable<T> {
 			}
 		}
 		return new ArrayList<String>();
+	}
+
+	public Integer getSpecficAdjacentNodes(String node, String adjNodeWanted) {
+		ArrayList<String> neighboursList = new ArrayList<String>();
+		int adjNodeWantedDistance = 0;
+		Set<String> keys = (Set<String>) graph.keySet();
+		for (String key : keys) {
+			if (key.equals(node)) {
+
+				Map<T, Integer> mapOfConnections = graph.get(key);
+
+				int counter = 0;
+				for (Entry<T, Integer> entry : mapOfConnections.entrySet()) {
+					String keyOfCity = (String) entry.getKey();
+					Integer value = entry.getValue();
+					neighboursList.add(counter, keyOfCity);
+					if (keyOfCity.equals(adjNodeWanted)) {
+						System.out.print("(" + value+ "KM)\n");
+						return value;
+					}
+				}
+
+				return null;
+			}
+		}
+		return null;
 	}
 
 	public Map<String, Integer> getGlobalAllPathToDistance() {
