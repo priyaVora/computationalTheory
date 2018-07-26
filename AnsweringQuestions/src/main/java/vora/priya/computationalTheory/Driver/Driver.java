@@ -12,7 +12,7 @@ import vora.priya.computationalTheory.Tokenizer.Tokenizer;
 public class Driver {
 
 	public static void main(String[] args) {
-		System.out.println("Traffic Advisor...");
+		System.out.println("\n> Hi I'm tour-guide Eliza. Please enter your map.");
 		Driver driver = new Driver();
 		boolean run = true;
 
@@ -24,15 +24,16 @@ public class Driver {
 					break loop;
 				} else {
 					boolean valid_response = parseTree.isCityInfo(userInput);
-					System.out.println("VALID: " + valid_response);
+					//System.out.println("VALID: " + valid_response);
 					String inputType = driver.reconginzeInputType(parseTree);
-					if (inputType.equals("Info")) {
-						// add to the network
-						System.out.println("Type: Info");
-					} else if (inputType.equals("Question")) {
-						// get the shortest path
-						System.out.println("Type: Question");
-					}
+//					if (inputType.equals("Info")) {
+//						// add to the network
+//						//System.out.println("Type: Info");
+//						System.out.println("> Ok.");
+//					} else if (inputType.equals("Question")) {
+//						// get the shortest path
+//						System.out.println("Type: Question");
+//					}
 					parseTree.printStack();
 				}
 			} catch (IOException e) {
@@ -43,7 +44,7 @@ public class Driver {
 
 	public String readInput() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("USER: ");
+		System.out.print("> ");
 
 		String readline = reader.readLine();
 		return readline;

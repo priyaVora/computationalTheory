@@ -11,7 +11,7 @@ public class Verb extends Symbol {
 
 	public Verb() {
 		listOfVerbs = new ArrayList<String>();
-		String verbs = "connects is";
+		String verbs = "connects is connecting";
 		String[] eachVerb = verbs.split(" ");
 		listOfValidVerbs = eachVerb;
 

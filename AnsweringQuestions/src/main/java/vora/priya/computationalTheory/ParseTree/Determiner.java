@@ -11,7 +11,7 @@ public class Determiner extends Symbol {
 
 	public Determiner() {
 		listOfDeterminer = new ArrayList<String>();
-		String determiners = "A What what the those";
+		String determiners = "A What what the those a";
 		String[] eachDet = determiners.split(" ");
 
 		listOfValidDeterminers = eachDet;

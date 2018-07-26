@@ -468,7 +468,7 @@ public class ParseTree {
 			verb.setVerb_Value(symbol.getSymbol());
 			stack.pop();
 			stack.push(verb);
-
+			checkIfBuildingPart();
 			return true;
 		} else if (checkifStackCanReduceTo_Adjective() == true) {
 			Adjective adjective = new Adjective();
@@ -476,6 +476,20 @@ public class ParseTree {
 			adjective.setAdjectiveValue(symbol.getSymbol());
 			stack.pop();
 			stack.push(adjective);
+			return true;
+		} else if (checkifStackCanReduceT0_Build() == true) {
+			Build build = new Build();
+			build.setBuild_Value(symbol.getSymbol());
+			build.setSymbol("Build Set");
+			stack.pop();
+			stack.push(build);
+			return true;
+		} else if (checkifStackCanReduceT0_Tour() == true) {
+			Tour tour = new Tour();
+			tour.setTour_value(symbol.getSymbol());
+			tour.setSymbol("Tour Set");
+			stack.pop();
+			stack.push(tour);
 			return true;
 		}
 
@@ -488,6 +502,70 @@ public class ParseTree {
 			combineCityNames();
 			return true;
 		}
+	}
+
+	public void checkIfBuildingPart() {
+		Verb verb = new Verb();
+		Tour tour = new Tour();
+		Determiner determiner = new Determiner();
+		Build build = new Build();
+
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Verb")) {
+				verb = (Verb) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Tour Set")) {
+						tour = (Tour) stack.pop();
+						if (!(stack.isEmpty())) {
+							if (stack.peek().getSymbol().equals("Determiner")) {
+								determiner = (Determiner) stack.pop();
+								if (!(stack.isEmpty())) {
+									if (stack.peek().getSymbol().equals("Build Set")) {
+										build = (Build) stack.pop();
+										BuildingPart buildingPart = new BuildingPart();
+										buildingPart.setVerb(verb);
+										buildingPart.setDet(determiner);
+										buildingPart.setBuild(build);
+										buildingPart.setTourset(tour);
+										buildingPart.setSymbol("Building Part");
+										stack.push(buildingPart);
+
+									} else {
+										stack.push(determiner);
+										stack.push(tour);
+										stack.push(verb);
+									}
+								} else {
+									stack.push(determiner);
+									stack.push(tour);
+									stack.push(verb);
+								}
+							}
+						} else {
+							stack.push(tour);
+							stack.push(verb);
+
+						}
+					} else {
+						stack.push(verb);
+					}
+				} else {
+					stack.push(verb);
+				}
+
+			}
+		}
+
+	}
+
+	private boolean checkifStackCanReduceT0_Tour() {
+		Tour tour = new Tour();
+		return tour.isTour(stack.peek().getSymbol());
+	}
+
+	private boolean checkifStackCanReduceT0_Build() {
+		Build build = new Build();
+		return build.isBuild(stack.peek().getSymbol());
 	}
 
 	private boolean checkIfStackReduceTo_Preposition() {

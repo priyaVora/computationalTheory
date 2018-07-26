@@ -348,7 +348,26 @@ public class Prims<T> {
 
 	}
 
-	void start() throws IOException {
+	public void start() throws IOException {
 		this.getData();
+		String tempCities = "Shanghai Moscow Berlin Paris";
+		this.operateFindPaths(this, tempCities);
 	}
+
+	public String getShortestPath() {
+		return shortestPath;
+	}
+
+	public void setShortestPath(String shortestPath) {
+		this.shortestPath = shortestPath;
+	}
+
+	public Integer getShortestPathDistance() {
+		return shortestPathDistance;
+	}
+
+	public void setShortestPathDistance(Integer shortestPathDistance) {
+		this.shortestPathDistance = shortestPathDistance;
+	}
+
 }
