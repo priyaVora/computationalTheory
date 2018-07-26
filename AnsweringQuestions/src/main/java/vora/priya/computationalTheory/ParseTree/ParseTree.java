@@ -197,6 +197,7 @@ public class ParseTree {
 								cityCombo.setCityTwo(city2);
 								cityCombo.setSymbol("City Combo Info");
 								stack.push(cityCombo);
+								checkifTourRequestExist();
 							}
 						} else {
 							stack.push(conjunction);
@@ -402,6 +403,37 @@ public class ParseTree {
 
 					// noun.setSymbol("Noun");
 					stack.push(noun);
+				}
+			}
+		}
+	}
+
+	public void checkifTourRequestExist() {
+		CityComboInfo comboInfo = new CityComboInfo();
+		BuildingPart build = new BuildingPart();
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("City Combo Info")) {
+				comboInfo = (CityComboInfo) stack.pop();
+				if (!(stack.isEmpty())) {
+					if (stack.peek().getSymbol().equals("Building Part")) {
+						build = (BuildingPart) stack.pop();
+						TourRequest request = new TourRequest();
+						request.setBuildingPart(build);
+						request.setCityCOmboInfo(comboInfo);
+						request.setSymbol("Tour Request");
+						stack.push(request);
+						// Nominative_Case nom = new Nominative_Case();
+						// nom.setAdjective(adjective);
+						// nom.setNoun(noun);
+						// nom.setSymbol("Nominative Case");
+						// stack.push(nom);
+					} else {
+						stack.push(build);
+					}
+				} else {
+
+					// noun.setSymbol("Noun");
+					stack.push(build);
 				}
 			}
 		}
