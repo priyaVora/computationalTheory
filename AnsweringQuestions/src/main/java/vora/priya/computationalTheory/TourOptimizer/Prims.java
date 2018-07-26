@@ -274,6 +274,24 @@ public class Prims<T> {
 		return path;
 	}
 
+	@SuppressWarnings("unchecked")
+	public Integer findEdgeValue(Prims prims, String source, String dest) {
+
+		System.out.println("\n\n");
+		T sourceValue = (T) source.trim();
+		Map<T, Integer> set = prims.getGraphPrims().getEdges(sourceValue);
+		Integer distanceValue = set.get(sourceValue);
+		
+		for (Entry<T, Integer> t : set.entrySet()) {
+			String name = (String) t.getKey();
+			if(dest.trim().equals(name.trim())) { 				
+				Integer distance = t.getValue();
+				System.out.println("Distance: " + distance);
+			}
+		}
+		return distanceValue;
+	}
+
 	public static void main(String[] args) throws IOException {
 		GraphPrims<Character> graphPrims = new GraphPrims<Character>();
 		Prims<Character> prims = new Prims<Character>();
@@ -287,7 +305,7 @@ public class Prims<T> {
 		System.out.println("\n\n");
 		prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), "Shanghai", "Berlin");
 		System.out.println("///////////////////////////////////////////////////////");
-
+		prims.findEdgeValue(prims, "London", "Paris");
 	}
 
 	void start() throws IOException {

@@ -65,16 +65,6 @@ public class GraphPrims<T> implements Iterable<T> {
 		return false;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	Stack<String> currentPath = new Stack<String>();
 	List<String> visitedList = new ArrayList<String>();
@@ -116,7 +106,9 @@ public class GraphPrims<T> implements Iterable<T> {
 				if (!(visitedList.contains(adjNode))) {
 
 					// System.out.println("\n----------Current: " + currentVertex + "-------");
-					foundPath += currentVertex + "----->";
+					if(!foundPath.contains(currentVertex)) { 
+						foundPath += currentVertex + "----->";						
+					}
 					findPaths(graphs, adjNode, destinationVertex, foundPath, listOfAllPaths);
 				}
 			}
