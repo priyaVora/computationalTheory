@@ -14,7 +14,6 @@ import vora.priya.computationalTheory.TourOptimizer.GraphPrims;
 import vora.priya.computationalTheory.TourOptimizer.Prims;
 
 public class Driver {
-	GraphPrims<Character> graphPrims = new GraphPrims<Character>();
 	static Prims<String> prims = new Prims<String>();
 
 	public static void main(String[] args) {
@@ -36,21 +35,26 @@ public class Driver {
 						// add to the network
 						// System.out.println("Type: Info");
 						System.out.println("> Ok.");
-						addToGraph(parseTree.getSentenceRecognized().getCityComboInfo().getCityOne().getCityName_Value(),
+						addToGraph(
+								parseTree.getSentenceRecognized().getCityComboInfo().getCityOne().getCityName_Value(),
 								parseTree.getSentenceRecognized().getCityComboInfo().getCityTwo().getCityName_Value(),
 								Integer.parseInt(parseTree.getSentenceRecognized().getDistanceInfo().getDistanceNumber()
 										.getDistanceValue()));
+						if (prims.getGraphPrims() == null) {
+							System.out.println("Graph is still null");
+						}
 					} else if (inputType.equals("Question")) {
 						// get the shortest path
 						System.out.println("Type: Question");
 					} else if (inputType.equals("Request")) {
 						System.out.println("Type: Request");
-						
-						getShortestPath("Shanghai Moscow Berlin Paris");
+						String requestInput = userInput.trim();
+						requestInput = parseBuildRequest(requestInput);
+						getShortestPath(requestInput);
 					} else {
 
 					}
-					// parseTree.printStack();
+					parseTree.printStack();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -67,11 +71,31 @@ public class Driver {
 	}
 
 	public static void getShortestPath(String tempCities) {
-		prims.operateFindPaths(prims, tempCities);
+		prims.operateFindPaths(tempCities);
 		String path = prims.getShortestPath();
 		Integer distance = prims.getShortestPathDistance();
 		System.out.println("Shorest Path: " + path);
 		System.out.println("Shortest Distance: " + distance);
+	}
+
+	public static String parseBuildRequest(String requestInput) {
+		System.out.println("Original: " + requestInput);
+		requestInput = requestInput.replace("Build", "");
+		requestInput = requestInput.replace("a ", "");
+		requestInput = requestInput.replace("tour", "");
+		requestInput = requestInput.replace("connecting", "");
+		requestInput = requestInput.replace("and", "");
+		requestInput = requestInput.trim();
+		System.out.println("Original Modified: " + requestInput);
+		String[] cityList = requestInput.split(",");
+		int counter = 0;
+		String cityWanted = "";
+		for (String string : cityList) {
+			System.out.println(string.trim());
+			cityWanted += string.trim() + " ";
+		}
+		System.out.println(cityWanted);
+		return cityWanted;
 	}
 
 	public String readInput() throws IOException {

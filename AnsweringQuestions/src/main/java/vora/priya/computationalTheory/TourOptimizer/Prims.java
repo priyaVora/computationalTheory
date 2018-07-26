@@ -198,7 +198,7 @@ public class Prims<T> {
 
 	}
 
-	public void operateFindPaths(Prims prims, String userInput) {
+	public void operateFindPaths(String userInput) {
 
 		Map<String, Integer> routeMap = new HashMap<String, Integer>();
 
@@ -208,7 +208,7 @@ public class Prims<T> {
 			List<String> otherCities = findOtherCityNames(eachCity);
 			// System.out.println(" ");
 			for (String eachOtherCity : otherCities) {
-				List<String> listOfPaths = prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), eachCity.trim(),
+				List<String> listOfPaths = this.getGraphPrims().findAllPaths(this.getGraphPrims(), eachCity.trim(),
 						eachOtherCity.trim());
 
 			}
@@ -217,7 +217,7 @@ public class Prims<T> {
 			// System.out.println("\nShortest Path Operation Below: ");
 
 			String[] citiesWanted = userInput.trim().split(" ");
-			Map<String, Integer> allPathsToDistanceMap = prims.getGraphPrims().getGlobalAllPathToDistance();
+			Map<String, Integer> allPathsToDistanceMap = this.getGraphPrims().getGlobalAllPathToDistance();
 
 			for (Entry<String, Integer> entry : allPathsToDistanceMap.entrySet()) {
 				String path = entry.getKey();
@@ -347,15 +347,15 @@ public class Prims<T> {
 
 		// System.out.println("///////////////////////////////////////////////////////");
 		String tempCities = "Shanghai Moscow Berlin Paris";
-		prims.operateFindPaths(prims, tempCities);
+		prims.operateFindPaths(tempCities);
 		// System.out.println("\n\n");
 
 	}
 
 	public void start() throws IOException {
 		this.getData();
-		String tempCities = "Shanghai Moscow Berlin Paris";
-		this.operateFindPaths(this, tempCities);
+		//String tempCities = "Shanghai Moscow Berlin Paris";
+		//this.operateFindPaths(tempCities);
 	}
 
 	public String getShortestPath() {
