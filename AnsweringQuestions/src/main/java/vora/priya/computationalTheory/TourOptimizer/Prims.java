@@ -143,6 +143,10 @@ public class Prims<T> {
 		br.close();
 	}
 
+	public void addEdgeToGraph(T startV, T destination, int distance) {
+		graphPrims.addEdge(startV, destination, distance);
+	}
+
 	public void runMinSpanTree(GraphPrims<T> graphPrims) {
 		getMinSpanTree(graphPrims);
 		cableLengthCalculator();
@@ -199,18 +203,18 @@ public class Prims<T> {
 		Map<String, Integer> routeMap = new HashMap<String, Integer>();
 
 		List<String> allCities = findCityNames();
-		System.out.println("*****************************");
+		// System.out.println("*****************************");
 		for (String eachCity : allCities) {
 			List<String> otherCities = findOtherCityNames(eachCity);
-			System.out.println(" ");
+			// System.out.println(" ");
 			for (String eachOtherCity : otherCities) {
 				List<String> listOfPaths = prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), eachCity.trim(),
 						eachOtherCity.trim());
 
 			}
-			System.out.println("-------------------------------------------------");
+			// System.out.println("-------------------------------------------------");
 
-			System.out.println("\nShortest Path Operation Below: ");
+			// System.out.println("\nShortest Path Operation Below: ");
 
 			String[] citiesWanted = userInput.trim().split(" ");
 			Map<String, Integer> allPathsToDistanceMap = prims.getGraphPrims().getGlobalAllPathToDistance();
@@ -247,8 +251,8 @@ public class Prims<T> {
 			}
 
 		}
-		System.out.println("\nShortest Path: " + shortestPath);
-		System.out.println("Shortest Distance " + shortestPathDistance);
+		 System.out.println("\nShortest Path: " + shortestPath);
+		 System.out.println("Shortest Distance " + shortestPathDistance);
 	}
 
 	public void findShortestRouteWithDistance(Map<String, Integer> routeMap) {
@@ -272,11 +276,11 @@ public class Prims<T> {
 		List<String> cityNames = findCityNames();
 		List<String> otherCityNames = new ArrayList<String>();
 
-		System.out.println(" ");
-		System.out.print(currentCity + ": ");
+		// System.out.println(" ");
+		// System.out.print(currentCity + ": ");
 		for (String each_city : cityNames) {
 			if (!(each_city.trim().equals(currentCity.trim()))) {
-				System.out.print(each_city + " ");
+				// System.out.print(each_city + " ");
 				otherCityNames.add(each_city);
 			}
 		}
@@ -284,29 +288,29 @@ public class Prims<T> {
 	}
 
 	public void print(List<EdgePrims<T>> mstList, int count, int cableLength) {
-		System.out.println("\nMST " + count);
-		System.out.print("\nCities on Tour: ");
-		individualVertices = new HashSet<T>();
-
-		for (EdgePrims<T> eachEdge : mstList) {
-			if (!individualVertices.contains(eachEdge.getSource())) {
-				individualVertices.add(eachEdge.getSource());
-			}
-			if (!individualVertices.contains(eachEdge.getTarget())) {
-				individualVertices.add(eachEdge.getTarget());
-			}
-		}
-
-		for (T eachVertice : individualVertices) {
-			System.out.print(eachVertice + " ");
-		}
-		System.out.println("\nCable Needed :" + cableMap.get(count) + " feet");
-		System.out.println(" ");
+		// System.out.println("\nMST " + count);
+		// System.out.print("\nCities on Tour: ");
+		// individualVertices = new HashSet<T>();
+		//
+		// for (EdgePrims<T> eachEdge : mstList) {
+		// if (!individualVertices.contains(eachEdge.getSource())) {
+		// individualVertices.add(eachEdge.getSource());
+		// }
+		// if (!individualVertices.contains(eachEdge.getTarget())) {
+		// individualVertices.add(eachEdge.getTarget());
+		// }
+		// }
+		//
+		// for (T eachVertice : individualVertices) {
+		// System.out.print(eachVertice + " ");
+		// }
+		// System.out.println("\nCable Needed :" + cableMap.get(count) + " feet");
+		// System.out.println(" ");
 		// for (EdgePrims<T> edgePrims : mstList) {
 		// System.out.println(edgePrims.toString());
 		// }
 
-		System.out.println("\n Total Cable Required: " + totalCableLength + " ft");
+		// System.out.println("\n Total Cable Required: " + totalCableLength + " ft");
 	}
 
 	private static String promptUserFileath() {
@@ -341,10 +345,10 @@ public class Prims<T> {
 		Prims<Character> prims = new Prims<Character>();
 		prims.start();
 
-		System.out.println("///////////////////////////////////////////////////////");
+		// System.out.println("///////////////////////////////////////////////////////");
 		String tempCities = "Shanghai Moscow Berlin Paris";
 		prims.operateFindPaths(prims, tempCities);
-		System.out.println("\n\n");
+		// System.out.println("\n\n");
 
 	}
 

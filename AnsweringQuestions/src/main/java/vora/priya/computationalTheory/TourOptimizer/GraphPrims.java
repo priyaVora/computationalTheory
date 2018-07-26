@@ -97,7 +97,7 @@ public class GraphPrims<T> implements Iterable<T> {
 			totalDistance += distanceValue;
 			counter++;
 		}
-		System.out.println("Total Distance: " + totalDistance);
+		//System.out.println("Total Distance: " + totalDistance);
 		return totalDistance;
 	}
 
@@ -113,7 +113,7 @@ public class GraphPrims<T> implements Iterable<T> {
 		findPaths(graphs, currentVertex.trim(), destinationVertex.trim(), foundPath, listOfAllPaths);
 
 		for (String string : listOfAllPaths) {
-			System.out.println("\nFound Path: " + string);
+			//System.out.println("\nFound Path: " + string);
 			Integer distance = findFullPathValue(string);
 
 			globalAllPathToDistance.put(string, distance);

@@ -8,6 +8,7 @@ import vora.priya.computationalTheory.Tokenizer.Tokenizer;
 public class ParseTree {
 	private CityInfo sentenceRecognized;
 	private CityQuestion sentenceQuestion;
+	private TourRequest tourRequest;
 
 	private Tokenizer tokenizer;
 
@@ -48,11 +49,18 @@ public class ParseTree {
 		checkifDistanceInfo();
 		checkifCityInfoExist();
 		checkifCityQuestionExist();
+		checkifTourRequestExist();
 		boolean validInfo = checkIfStackContainsAValidCityInfo();
 		boolean validQuestion = checkIfStackContainsAValidCityQuestion();
+		boolean validRequest = checkIfStackContainsAValidTourRequest();
 		if (validInfo == true) {
 			sentenceQuestion = null;
+			tourRequest = null;
 		} else if (validQuestion == true) {
+			sentenceRecognized = null;
+			tourRequest = null;
+		} else if (validRequest == true) {
+			sentenceQuestion = null;
 			sentenceRecognized = null;
 		} else {
 			return false;
@@ -197,7 +205,7 @@ public class ParseTree {
 								cityCombo.setCityTwo(city2);
 								cityCombo.setSymbol("City Combo Info");
 								stack.push(cityCombo);
-								checkifTourRequestExist();
+
 							}
 						} else {
 							stack.push(conjunction);
@@ -371,6 +379,22 @@ public class ParseTree {
 			if (stack.peek().getSymbol().equals("City Question")) {
 				if (stack.size() == 1) {
 					sentenceQuestion = (CityQuestion) stack.peek();
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	private boolean checkIfStackContainsAValidTourRequest() {
+		if (!(stack.isEmpty())) {
+			if (stack.peek().getSymbol().equals("Tour Request")) {
+				if (stack.size() == 1) {
+					tourRequest = (TourRequest) stack.peek();
 					return true;
 				} else {
 					return false;
@@ -686,6 +710,14 @@ public class ParseTree {
 
 	public void setSentenceQuestion(CityQuestion sentenceQuestion) {
 		this.sentenceQuestion = sentenceQuestion;
+	}
+
+	public TourRequest getTourRequest() {
+		return tourRequest;
+	}
+
+	public void setTourRequest(TourRequest tourRequest) {
+		this.tourRequest = tourRequest;
 	}
 
 }
