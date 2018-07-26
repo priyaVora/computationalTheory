@@ -27,6 +27,9 @@ public class Prims<T> {
 	Map<Integer, Integer> cableMap = new HashMap<Integer, Integer>();
 	public Integer totalCableLength = 0;
 
+	private String shortestPath;
+	private Integer shortestPathDistance;
+
 	public static Comparator<EdgePrims> edgePrioritySetter = new Comparator<EdgePrims>() { // online solution to set
 																							// priority
 		public int compare(EdgePrims edge1, EdgePrims edge2) {
@@ -191,7 +194,9 @@ public class Prims<T> {
 
 	}
 
-	public void operateFindPaths(Prims prims) {
+	public void operateFindPaths(Prims prims, String userInput) {
+
+		Map<String, Integer> routeMap = new HashMap<String, Integer>();
 
 		List<String> allCities = findCityNames();
 		System.out.println("*****************************");
@@ -205,7 +210,62 @@ public class Prims<T> {
 			}
 			System.out.println("-------------------------------------------------");
 
+			System.out.println("\nShortest Path Operation Below: ");
+
+			String[] citiesWanted = userInput.trim().split(" ");
+			Map<String, Integer> allPathsToDistanceMap = prims.getGraphPrims().getGlobalAllPathToDistance();
+
+			for (Entry<String, Integer> entry : allPathsToDistanceMap.entrySet()) {
+				String path = entry.getKey();
+				Integer distance = entry.getValue();
+
+				path = path.replace("----->", " ");
+				String[] currentPath = path.split(" ");
+				List<String> currentList = new ArrayList<String>();
+				for (int i = 0; i < currentPath.length; i++) {
+					currentList.add(i, currentPath[i]);
+				}
+
+				boolean valid = false;
+				loop: for (String city_wanted : citiesWanted) {
+					if (currentList.contains(city_wanted)) {
+						valid = true;
+					} else {
+						valid = false;
+						break loop;
+					}
+				}
+
+				if (valid == true) {
+
+					// System.out.println("Accepted Route: " + path);
+					// System.out.println("DISTANCE: " + distance);
+
+					routeMap.put(path, distance);
+					findShortestRouteWithDistance(routeMap);
+				}
+			}
+
 		}
+		System.out.println("\nShortest Path: " + shortestPath);
+		System.out.println("Shortest Distance " + shortestPathDistance);
+	}
+
+	public void findShortestRouteWithDistance(Map<String, Integer> routeMap) {
+		for (Entry<String, Integer> t : routeMap.entrySet()) {
+			String path = t.getKey();
+			Integer distance = t.getValue();
+
+			if (shortestPath == null) {
+				shortestPath = path;
+				shortestPathDistance = distance;
+
+			} else if (shortestPathDistance > distance) {
+				shortestPath = path;
+				shortestPathDistance = distance;
+			}
+		}
+
 	}
 
 	public List<String> findOtherCityNames(String currentCity) {
@@ -282,12 +342,9 @@ public class Prims<T> {
 		prims.start();
 
 		System.out.println("///////////////////////////////////////////////////////");
-		prims.operateFindPaths(prims);
+		String tempCities = "Shanghai Moscow Berlin Paris";
+		prims.operateFindPaths(prims, tempCities);
 		System.out.println("\n\n");
-		prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), "Shanghai", "Berlin");
-		System.out.println("///////////////////////////////////////////////////////");
-		// prims.findEdgeValue(prims, "London", "Paris");
-		// prims.findFullPathValue(prims, "Paris----->Geneva----->Moscow");
 
 	}
 

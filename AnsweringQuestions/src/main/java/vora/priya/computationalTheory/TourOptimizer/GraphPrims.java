@@ -12,6 +12,8 @@ import java.util.Stack;
 
 public class GraphPrims<T> implements Iterable<T> {
 
+	Map<String, Integer> globalAllPathToDistance = new HashMap<String, Integer>();
+
 	private final Map<T, Map<T, Integer>> graph;
 
 	public GraphPrims() {
@@ -112,7 +114,9 @@ public class GraphPrims<T> implements Iterable<T> {
 
 		for (String string : listOfAllPaths) {
 			System.out.println("\nFound Path: " + string);
-			findFullPathValue(string);
+			Integer distance = findFullPathValue(string);
+
+			globalAllPathToDistance.put(string, distance);
 		}
 		return listOfAllPaths;
 	}
@@ -169,6 +173,14 @@ public class GraphPrims<T> implements Iterable<T> {
 			}
 		}
 		return new ArrayList<String>();
+	}
+
+	public Map<String, Integer> getGlobalAllPathToDistance() {
+		return globalAllPathToDistance;
+	}
+
+	public void setGlobalAllPathToDistance(Map<String, Integer> globalAllPathToDistance) {
+		this.globalAllPathToDistance = globalAllPathToDistance;
 	}
 
 	// public List<Vertex<T>> getAllVertex() {
