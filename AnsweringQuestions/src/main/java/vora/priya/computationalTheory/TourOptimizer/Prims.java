@@ -199,7 +199,9 @@ public class Prims<T> {
 			List<String> otherCities = findOtherCityNames(eachCity);
 			System.out.println(" ");
 			for (String eachOtherCity : otherCities) {
-				prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), eachCity.trim(), eachOtherCity.trim());
+				List<String> listOfPaths = prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), eachCity.trim(),
+						eachOtherCity.trim());
+
 			}
 			System.out.println("-------------------------------------------------");
 
@@ -274,55 +276,18 @@ public class Prims<T> {
 		return path;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Integer findEdgeValue(Prims prims, String source, String dest) {
-		T sourceValue = (T) source.trim();
-		Map<T, Integer> set = prims.getGraphPrims().getEdges(sourceValue);
-		Integer distanceValue = set.get(sourceValue);
-
-		Integer distance = 0;
-		for (Entry<T, Integer> t : set.entrySet()) {
-			String name = (String) t.getKey();
-			if (dest.trim().equals(name.trim())) {
-				distance = t.getValue();
-				//System.out.println("Distance: " + distance);
-			}
-		}
-		return distance;
-	}
-
-	public Integer findFullPathValue(Prims prims, String path) {
-		//System.out.println("\nPath: " + path);
-		path = path.replace("----->", " ");
-		//System.out.println("\nReplaced Path: " + path);
-
-		String[] eachCity = path.split(" ");
-		int counter = 0;
-		int totalDistance = 0;
-		while (counter != eachCity.length-1) {
-			Integer distanceValue = findEdgeValue(prims, eachCity[counter], eachCity[counter + 1]);
-			totalDistance += distanceValue;
-			counter++;
-		}
-		System.out.println("Total Distance: " + totalDistance);
-		return totalDistance;
-	}
-
 	public static void main(String[] args) throws IOException {
 		GraphPrims<Character> graphPrims = new GraphPrims<Character>();
 		Prims<Character> prims = new Prims<Character>();
 		prims.start();
 
 		System.out.println("///////////////////////////////////////////////////////");
-		// prims.findCityNames();
-		System.out.println("\n\n");
-		// prims.findOtherCityNames("Shanghai");
 		prims.operateFindPaths(prims);
 		System.out.println("\n\n");
 		prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), "Shanghai", "Berlin");
 		System.out.println("///////////////////////////////////////////////////////");
-		prims.findEdgeValue(prims, "London", "Paris");
-		prims.findFullPathValue(prims, "Paris----->Geneva----->Moscow");
+		// prims.findEdgeValue(prims, "London", "Paris");
+		// prims.findFullPathValue(prims, "Paris----->Geneva----->Moscow");
 
 	}
 

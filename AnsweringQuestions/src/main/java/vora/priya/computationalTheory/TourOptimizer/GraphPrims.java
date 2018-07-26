@@ -64,7 +64,40 @@ public class GraphPrims<T> implements Iterable<T> {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public Integer findEdgeValue(String source, String dest) {
+		T sourceValue = (T) source.trim();
+		Map<T, Integer> set = this.getEdges(sourceValue);
+		Integer distanceValue = set.get(sourceValue);
+
+		Integer distance = 0;
+		for (Entry<T, Integer> t : set.entrySet()) {
+			String name = (String) t.getKey();
+			if (dest.trim().equals(name.trim())) {
+				distance = t.getValue();
+				// System.out.println("Distance: " + distance);
+			}
+		}
+		return distance;
+	}
+
+	public Integer findFullPathValue(String path) {
+		// System.out.println("\nPath: " + path);
+		path = path.replace("----->", " ");
+		// System.out.println("\nReplaced Path: " + path);
+
+		String[] eachCity = path.split(" ");
+		int counter = 0;
+		int totalDistance = 0;
+		while (counter != eachCity.length - 1) {
+			Integer distanceValue = findEdgeValue(eachCity[counter], eachCity[counter + 1]);
+			totalDistance += distanceValue;
+			counter++;
+		}
+		System.out.println("Total Distance: " + totalDistance);
+		return totalDistance;
+	}
 
 	Stack<String> currentPath = new Stack<String>();
 	List<String> visitedList = new ArrayList<String>();
@@ -74,12 +107,12 @@ public class GraphPrims<T> implements Iterable<T> {
 		List<String> listOfAllPaths = new ArrayList<String>();
 		visitedList = new ArrayList<String>();
 		currentPath = new Stack<String>();
-		
-		
+
 		findPaths(graphs, currentVertex.trim(), destinationVertex.trim(), foundPath, listOfAllPaths);
 
 		for (String string : listOfAllPaths) {
 			System.out.println("\nFound Path: " + string);
+			findFullPathValue(string);
 		}
 		return listOfAllPaths;
 	}
@@ -106,8 +139,8 @@ public class GraphPrims<T> implements Iterable<T> {
 				if (!(visitedList.contains(adjNode))) {
 
 					// System.out.println("\n----------Current: " + currentVertex + "-------");
-					if(!foundPath.contains(currentVertex)) { 
-						foundPath += currentVertex + "----->";						
+					if (!foundPath.contains(currentVertex)) {
+						foundPath += currentVertex + "----->";
 					}
 					findPaths(graphs, adjNode, destinationVertex, foundPath, listOfAllPaths);
 				}
