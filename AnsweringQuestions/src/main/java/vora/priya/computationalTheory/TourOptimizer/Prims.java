@@ -129,7 +129,7 @@ public class Prims<T> {
 						T v2 = (T) splitWeight[0];
 
 						graphPrims.addEdge(startV, v2, Integer.parseInt(splitWeight[1]));
-						
+
 					}
 				}
 				lineCount++;
@@ -163,6 +163,62 @@ public class Prims<T> {
 			mstCount++;
 			System.out.println(" ");
 		}
+	}
+
+	public List<String> findCityNames() {
+		individualVertices = new HashSet<T>();
+		List<String> listOfCities = new ArrayList<String>();
+
+		for (List<EdgePrims<T>> eachMST : mstCollection) {
+			for (EdgePrims<T> eachEdge : eachMST) {
+				if (!individualVertices.contains(eachEdge.getSource())) {
+					individualVertices.add(eachEdge.getSource());
+				}
+				if (!individualVertices.contains(eachEdge.getTarget())) {
+					individualVertices.add(eachEdge.getTarget());
+				}
+			}
+
+			// System.out.println("####################################");
+			for (T eachVertice : individualVertices) {
+				// System.out.print(eachVertice + " ");
+				String each = eachVertice + " ";
+				listOfCities.add(each);
+			}
+
+		}
+		return listOfCities;
+
+	}
+
+	public void operateFindPaths(Prims prims) {
+
+		List<String> allCities = findCityNames();
+		System.out.println("*****************************");
+		for (String eachCity : allCities) {
+			List<String> otherCities = findOtherCityNames(eachCity);
+			System.out.println(" ");
+			for (String eachOtherCity : otherCities) {
+				prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), eachCity.trim(), eachOtherCity.trim());
+			}
+			System.out.println("-------------------------------------------------");
+
+		}
+	}
+
+	public List<String> findOtherCityNames(String currentCity) {
+		List<String> cityNames = findCityNames();
+		List<String> otherCityNames = new ArrayList<String>();
+
+		System.out.println(" ");
+		System.out.print(currentCity + ": ");
+		for (String each_city : cityNames) {
+			if (!(each_city.trim().equals(currentCity.trim()))) {
+				System.out.print(each_city + " ");
+				otherCityNames.add(each_city);
+			}
+		}
+		return otherCityNames;
 	}
 
 	public void print(List<EdgePrims<T>> mstList, int count, int cableLength) {
@@ -222,11 +278,16 @@ public class Prims<T> {
 		GraphPrims<Character> graphPrims = new GraphPrims<Character>();
 		Prims<Character> prims = new Prims<Character>();
 		prims.start();
-		
+
 		System.out.println("///////////////////////////////////////////////////////");
-		prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), "London", "Shanghai");
+		// prims.findCityNames();
+		System.out.println("\n\n");
+		// prims.findOtherCityNames("Shanghai");
+		prims.operateFindPaths(prims);
+		System.out.println("\n\n");
+		prims.getGraphPrims().findAllPaths(prims.getGraphPrims(), "Shanghai", "Berlin");
 		System.out.println("///////////////////////////////////////////////////////");
-		
+
 	}
 
 	void start() throws IOException {

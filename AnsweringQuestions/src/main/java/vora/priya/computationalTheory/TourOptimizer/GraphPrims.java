@@ -64,6 +64,17 @@ public class GraphPrims<T> implements Iterable<T> {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	Stack<String> currentPath = new Stack<String>();
 	List<String> visitedList = new ArrayList<String>();
@@ -71,10 +82,14 @@ public class GraphPrims<T> implements Iterable<T> {
 	public List<String> findAllPaths(GraphPrims graphs, String currentVertex, String destinationVertex) {
 		String foundPath = "";
 		List<String> listOfAllPaths = new ArrayList<String>();
-		findPaths(graphs, currentVertex, destinationVertex, foundPath, listOfAllPaths);
+		visitedList = new ArrayList<String>();
+		currentPath = new Stack<String>();
+		
+		
+		findPaths(graphs, currentVertex.trim(), destinationVertex.trim(), foundPath, listOfAllPaths);
 
 		for (String string : listOfAllPaths) {
-			System.out.println("Found Path: " + string);
+			System.out.println("\nFound Path: " + string);
 		}
 		return listOfAllPaths;
 	}
@@ -88,7 +103,7 @@ public class GraphPrims<T> implements Iterable<T> {
 			visitedList.remove(currentVertex);
 		}
 
-		if (currentVertex.equals(destinationVertex) && currentPath.size() != 1) {
+		if (currentVertex.trim().equals(destinationVertex.trim()) && currentPath.size() != 1) {
 
 			// System.out.println(" CURRENT: " + currentVertex);
 			foundPath += currentVertex;
