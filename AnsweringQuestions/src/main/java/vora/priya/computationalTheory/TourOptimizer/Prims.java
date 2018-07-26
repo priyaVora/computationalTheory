@@ -113,35 +113,35 @@ public class Prims<T> {
 		return listMinEdges;
 	}
 
-	private void getData() throws IOException {
-		int lineCount = 0;
-		String pathToFile = "City.txt";
-		File file = new File(pathToFile);
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		String st;
-
-		while ((st = br.readLine()) != null) {
-			if (!(st.contains("//"))) {
-				st = st.trim();
-				if (lineCount != 0) {
-					String[] splitSt = st.split(",");
-					String startVertex = splitSt[0];
-					for (int i = 1; i < splitSt.length; i++) {
-						String[] splitWeight = splitSt[i].split(":");
-						T startV = (T) startVertex;
-						T v2 = (T) splitWeight[0];
-
-						graphPrims.addEdge(startV, v2, Integer.parseInt(splitWeight[1]));
-
-					}
-				}
-				lineCount++;
-			}
-		}
-		this.runMinSpanTree(graphPrims);
-
-		br.close();
-	}
+	// private void getData() throws IOException {
+	// int lineCount = 0;
+	// String pathToFile = "City.txt";
+	// File file = new File(pathToFile);
+	// BufferedReader br = new BufferedReader(new FileReader(file));
+	// String st;
+	//
+	// while ((st = br.readLine()) != null) {
+	// if (!(st.contains("//"))) {
+	// st = st.trim();
+	// if (lineCount != 0) {
+	// String[] splitSt = st.split(",");
+	// String startVertex = splitSt[0];
+	// for (int i = 1; i < splitSt.length; i++) {
+	// String[] splitWeight = splitSt[i].split(":");
+	// T startV = (T) startVertex;
+	// T v2 = (T) splitWeight[0];
+	//
+	// graphPrims.addEdge(startV, v2, Integer.parseInt(splitWeight[1]));
+	//
+	// }
+	// }
+	// lineCount++;
+	// }
+	// }
+	// this.runMinSpanTree(graphPrims);
+	//
+	// br.close();
+	// }
 
 	public void addEdgeToGraph(T startV, T destination, int distance) {
 		graphPrims.addEdge(startV, destination, distance);
@@ -175,7 +175,7 @@ public class Prims<T> {
 	public List<String> findCityNames() {
 		individualVertices = new HashSet<T>();
 		List<String> listOfCities = new ArrayList<String>();
-
+		
 		for (List<EdgePrims<T>> eachMST : mstCollection) {
 			for (EdgePrims<T> eachEdge : eachMST) {
 				if (!individualVertices.contains(eachEdge.getSource())) {
@@ -190,7 +190,9 @@ public class Prims<T> {
 			for (T eachVertice : individualVertices) {
 				// System.out.print(eachVertice + " ");
 				String each = eachVertice + " ";
-				listOfCities.add(each);
+				if (!(listOfCities.contains(each))) {
+					listOfCities.add(each);
+				}
 			}
 
 		}
@@ -201,7 +203,7 @@ public class Prims<T> {
 	public void operateFindPaths(String userInput) {
 
 		Map<String, Integer> routeMap = new HashMap<String, Integer>();
-
+		this.runMinSpanTree(this.getGraphPrims());
 		List<String> allCities = findCityNames();
 		// System.out.println("*****************************");
 		for (String eachCity : allCities) {
@@ -242,20 +244,21 @@ public class Prims<T> {
 
 				if (valid == true) {
 
-					// System.out.println("Accepted Route: " + path);
-					// System.out.println("DISTANCE: " + distance);
+					System.out.println("Accepted Route: " + path);
+					 System.out.println("DISTANCE: " + distance);
 
 					routeMap.put(path, distance);
-					findShortestRouteWithDistance(routeMap);
+					System.out.println("Calculating the Shortest Route");
+					findShortestRouteWithDistanc2e(routeMap);
 				}
 			}
 
 		}
-		 System.out.println("\nShortest Path: " + shortestPath);
-		 System.out.println("Shortest Distance " + shortestPathDistance);
+		System.out.println("\nShortest Path: " + shortestPath);
+		System.out.println("Shortest Distance " + shortestPathDistance);
 	}
 
-	public void findShortestRouteWithDistance(Map<String, Integer> routeMap) {
+	public void findShortestRouteWithDistanc2e(Map<String, Integer> routeMap) {
 		for (Entry<String, Integer> t : routeMap.entrySet()) {
 			String path = t.getKey();
 			Integer distance = t.getValue();
@@ -340,22 +343,23 @@ public class Prims<T> {
 		return path;
 	}
 
-	public static void main(String[] args) throws IOException {
-		GraphPrims<Character> graphPrims = new GraphPrims<Character>();
-		Prims<Character> prims = new Prims<Character>();
-		prims.start();
-
-		// System.out.println("///////////////////////////////////////////////////////");
-		String tempCities = "Shanghai Moscow Berlin Paris";
-		prims.operateFindPaths(tempCities);
-		// System.out.println("\n\n");
-
-	}
+	// public static void main(String[] args) throws IOException {
+	// GraphPrims<Character> graphPrims = new GraphPrims<Character>();
+	// Prims<Character> prims = new Prims<Character>();
+	// //prims.start();
+	//
+	// //
+	// System.out.println("///////////////////////////////////////////////////////");
+	// String tempCities = "Shanghai Moscow Berlin Paris";
+	// prims.operateFindPaths(tempCities);
+	// // System.out.println("\n\n");
+	//
+	// }
 
 	public void start() throws IOException {
-		this.getData();
-		//String tempCities = "Shanghai Moscow Berlin Paris";
-		//this.operateFindPaths(tempCities);
+		// this.getData();
+		// String tempCities = "Shanghai Moscow Berlin Paris";
+		// this.operateFindPaths(tempCities);
 	}
 
 	public String getShortestPath() {

@@ -74,8 +74,8 @@ public class Driver {
 		prims.operateFindPaths(tempCities);
 		String path = prims.getShortestPath();
 		Integer distance = prims.getShortestPathDistance();
-		System.out.println("Shorest Path: " + path);
-		System.out.println("Shortest Distance: " + distance);
+		//System.out.println("Shorest Path: " + path);
+		//System.out.println("Shortest Distance: " + distance);
 	}
 
 	public static String parseBuildRequest(String requestInput) {
@@ -86,8 +86,10 @@ public class Driver {
 		requestInput = requestInput.replace("connecting", "");
 		requestInput = requestInput.replace("and", "");
 		requestInput = requestInput.trim();
+		requestInput = requestInput.replace("  ", " ");
 		System.out.println("Original Modified: " + requestInput);
 		String[] cityList = requestInput.split(",");
+		
 		int counter = 0;
 		String cityWanted = "";
 		for (String string : cityList) {
